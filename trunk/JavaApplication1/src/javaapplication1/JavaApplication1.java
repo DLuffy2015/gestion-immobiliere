@@ -11,7 +11,7 @@ package javaapplication1;
 public class JavaApplication1 {
 
     /**
-     * @param args the command line arguments
+     * @param args the command line argumentshjgjgj
      */
     public static void main(String[] args) {
         // TODO code application logic here hhhhhhhhhh
