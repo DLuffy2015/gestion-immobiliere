@@ -391,7 +391,7 @@ detailRech=detailRecherche.getText();
                   boolean rsVide=rsLocaux.first();
                  if(rsVide){
                    rsLocaux.absolute(det+1);
-                   Location location=new Location( rsLocaux.getInt(1));
+                   AjouterLocation location=new AjouterLocation( rsLocaux.getInt(1));
                    location.setVisible(true);
                  }
         } catch (SQLException ex) {
