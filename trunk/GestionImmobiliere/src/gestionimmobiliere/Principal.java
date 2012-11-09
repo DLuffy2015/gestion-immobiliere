@@ -4,6 +4,11 @@
  */
 package gestionimmobiliere;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,6 +22,8 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        initTabLocaux();
+        initTabLocataires();
     }
 
     /**
@@ -32,7 +39,6 @@ public class Principal extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         AjouLocal = new javax.swing.JButton();
         AjouLocataire = new javax.swing.JButton();
-        AffLocal = new javax.swing.JButton();
         Apropo = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -65,8 +71,6 @@ public class Principal extends javax.swing.JFrame {
 
         AjouLocataire.setText("Ajouter un locataire");
 
-        AffLocal.setText("Affichage les locataires");
-
         Apropo.setText("A propos");
         Apropo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,8 +97,7 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(AjouLocal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(AjouLocataire, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(AffLocal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(AjouLocataire, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -120,9 +123,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(AjouLocal)
                 .addGap(18, 18, 18)
                 .addComponent(AjouLocataire)
-                .addGap(18, 18, 18)
-                .addComponent(AffLocal)
-                .addGap(28, 28, 28)
+                .addGap(69, 69, 69)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
@@ -167,20 +168,19 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(detailRecherche, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(22, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(critereRechercher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(detailRecherche, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lancerRecherche)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lancerRecherche))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -329,15 +329,74 @@ public class Principal extends javax.swing.JFrame {
         });
     }
     
+    public void initTabLocaux(){
+  String  query= " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,locataire.nom FROM locaux LEFT JOIN locataire on locaux.locataire=locataire.id WHERE 1";
+        try {
+            ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
+            rsLocaux= ConxionBDD.stmt.executeQuery(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+ int row=0;
+ while(jTable1.getRowCount()!=0){  model.removeRow(0); } 
+        try {
+            while(rsLocaux.next()){
+
+            if(row>=jTable1.getRowCount())
+            {
+            model1.insertRow(jTable1.getRowCount(),new Object[]{"","","",""});}
+            jTable1.setValueAt(rsLocaux.getString(2),row,0);
+            jTable1.setValueAt(rsLocaux.getString(3),row,1);
+            jTable1.setValueAt(rsLocaux.getString(4),row,2);
+            jTable1.setValueAt(rsLocaux.getString(5),row,3); 
+            row++;
+            }       
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    public void initTabLocataires(){
+    String query;
+query ="SELECT id, nom, telephone, mail, adresse FROM locataire WHERE "+1;
+        try {
+              ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
+              rsLocataires = ConxionBDD.stmt.executeQuery(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        
+        int row=0;
+ while(jTable2.getRowCount()!=0){  model1.removeRow(0); } 
+        try {
+            while(rsLocataires.next()){
+
+            if(row>=jTable2.getRowCount())
+            {
+            model1.insertRow(jTable2.getRowCount(),new Object[]{"","","",""});}
+            jTable2.setValueAt(rsLocataires.getString(2),row,0);
+            jTable2.setValueAt(rsLocataires.getString(4),row,1);
+            jTable2.setValueAt(rsLocataires.getString(3),row,2);
+            jTable2.setValueAt(rsLocataires.getString(5),row,3); 
+            row++;
+            }       
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }   
+    
+    
     DefaultTableModel model=new DefaultTableModel(
     new Object [][] {
-        {null, null, null, null, null}     
+        {null, null, null, null}     
     },
     new String [] {
-      "N° de porte", "Nombre de pieces","Prix","Disponobilité", "Locataire"  }
+      "N° de porte", "Nombre de pieces","Prix", "Locataire"  }
 ) {
     boolean[] canEdit = new boolean [] {
-        false, false, false, false, false
+        false, false, false, false
     };
 
     public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -350,7 +409,7 @@ public class Principal extends javax.swing.JFrame {
         {null, null, null, null}     
     },
     new String [] {
-      "Nom et prénom", "E_mail","Téléphone","Etat" }
+      "Nom et prénom", "E_mail","Téléphone","Adresse" }
 ) {
     boolean[] canEdit = new boolean [] {
         false, false, false, false
@@ -360,8 +419,9 @@ public class Principal extends javax.swing.JFrame {
         return canEdit [columnIndex];
     }
 };
+    private static ResultSet rsLocaux;
+private static ResultSet rsLocataires;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AffLocal;
     private javax.swing.JButton AjouLocal;
     private javax.swing.JButton AjouLocataire;
     private javax.swing.JButton Apropo;

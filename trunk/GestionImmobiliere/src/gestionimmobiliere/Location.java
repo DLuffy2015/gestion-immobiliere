@@ -4,6 +4,13 @@
  */
 package gestionimmobiliere;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author imane
@@ -13,7 +20,10 @@ public class Location extends javax.swing.JFrame {
     /**
      * Creates new form ModifierLocation
      */
-    public Location() {
+    public Location(String local) {
+        localV=local;
+        //manque les autres info a recuperer avec une requette
+        
         initComponents();
     }
 
@@ -44,13 +54,39 @@ public class Location extends javax.swing.JFrame {
 
         jLabel1.setText("Locataire :");
 
+        locataire.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                locataireActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("N° de porte :");
 
+        local.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                localActionPerformed(evt);
+            }
+        });
+        local.setText(localV);
+        local.setEditable(false);
+
         jLabel3.setText("Versement :");
+
+        versement.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                versementActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Date début :");
 
         jLabel5.setText("La durée :");
+
+        duree.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dureeActionPerformed(evt);
+            }
+        });
 
         valider.setText("Valider");
         valider.addActionListener(new java.awt.event.ActionListener() {
@@ -63,6 +99,11 @@ public class Location extends javax.swing.JFrame {
 
         jSpinner1.setEditor(new javax.swing.JSpinner.DateEditor(jSpinner1, "yyyy-MM-dd"));
         jSpinner1.setValue(dateC);
+        jSpinner1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinner1StateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -147,45 +188,64 @@ public class Location extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void validerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerActionPerformed
-        // TODO add your handling code here:
+       int id=rechercherLocataire();
+        if(id!=-1){
+     String query = "UPDATE locaux SET idLocataire = '"+id+"' ,versement = '"+versementV+"' , dateDebut = "+dateDebutV+" , duree = '"+dureeV+"' WHERE etageNumPorte = "+localV ;
+            try {
+                ConxionBDD.stmt.executeUpdate(query);
+            } catch (SQLException ex) {
+                Logger.getLogger(Location.class.getName()).log(Level.SEVERE, null, ex);
+            }
+}
+       else{//locataire n existe pa re_inserer
+        }
     }//GEN-LAST:event_validerActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Location.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Location.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Location.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Location.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void locataireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locataireActionPerformed
+      locataireV=locataire.getText();  
+    }//GEN-LAST:event_locataireActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Location().setVisible(true);
-            }
-        });
-    }
+    private void localActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_localActionPerformed
+                     
+    }//GEN-LAST:event_localActionPerformed
+
+    private void versementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_versementActionPerformed
+        versementV=versement.getText();       
+    }//GEN-LAST:event_versementActionPerformed
+
+    private void dureeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dureeActionPerformed
+        dureeV=duree.getText();       
+    }//GEN-LAST:event_dureeActionPerformed
+
+    private void jSpinner1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner1StateChanged
+      Object d= jSpinner1.getValue();
+     
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+         dateDebutV = simpleDateFormat.format(d);
+       
+    }//GEN-LAST:event_jSpinner1StateChanged
+    public int rechercherLocataire()
+    { 
+      int i=-1;
+    try{
+            String query;
+            query= " SELECT idLocataire FROM locataires  WHERE nomPrenom = '"+locataireV+"'";
+            ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
+             ResultSet rs= ConxionBDD.stmt.executeQuery(query);
+            while(rs.next()) i=rs.getInt(1);
+
+        }catch ( SQLException sqlException )
+                                            {  sqlException.printStackTrace(); }
+      return i;
+     }
+    
     java.util.GregorianCalendar calender=new java.util.GregorianCalendar();
      private Object dateC=calender.getTime();
+     private String locataireV="";
+     private String localV="";
+     private String versementV="";
+     private String dureeV="";
+     private String dateDebutV;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton annuler;
     private javax.swing.JTextField duree;

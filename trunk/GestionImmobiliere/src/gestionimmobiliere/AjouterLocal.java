@@ -1,10 +1,12 @@
-/*
+/*    
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package gestionimmobiliere;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -49,6 +51,7 @@ public class AjouterLocal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         description = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         jLabel6.setText("jLabel6");
 
@@ -115,6 +118,8 @@ public class AjouterLocal extends javax.swing.JFrame {
 
         jLabel7.setText("Le champs avec * est obligatoire ");
 
+        jLabel8.setText(" ");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -122,13 +127,6 @@ public class AjouterLocal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Valider)
-                        .addGap(27, 27, 27)
-                        .addComponent(Annuler)
-                        .addGap(67, 67, 67))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -158,7 +156,16 @@ public class AjouterLocal extends javax.swing.JFrame {
                                 .addComponent(jLabel5)
                                 .addGap(18, 18, 18)
                                 .addComponent(jScrollPane1)))
-                        .addGap(0, 33, Short.MAX_VALUE))))
+                        .addGap(0, 33, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Valider)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Annuler)
+                        .addGap(63, 63, 63))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,8 +195,11 @@ public class AjouterLocal extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(Valider)
-                        .addComponent(jLabel7))
-                    .addComponent(Annuler))
+                        .addComponent(Annuler))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel8)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -206,8 +216,8 @@ public class AjouterLocal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -237,20 +247,43 @@ public class AjouterLocal extends javax.swing.JFrame {
        descriptionV=description.getText();
        String query;
        if(!etageNporteV.equals("")){
-       query= "INSERT INTO location (adress, prix, surface, etat, description, type ) VALUES ('"+etageNporteV+"'," +prixV+"," +surfaceV+"," +etatV+",'"+descriptionV+"',"+FiV+")";
+           
+           if(rechercherLocal()==-1){
+       query= "INSERT INTO location (etageNumPorte, prix, surface, etat, description, nombrePieces ) VALUES ('"+etageNporteV+"'," +prixV+"," +surfaceV+"," +etatV+",'"+descriptionV+"',"+FiV+")";
         try {
+            
             ConxionBDD.stmt.executeUpdate(query);
         } catch (SQLException ex) {
             Logger.getLogger(AjouterLocal.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
        // fermer la fenetre et initialiser celle du debut
         
        }
-       
-       
+           else{  jLabel8.setText(" Ce local existe déja!. ");
+           }}
        
     }//GEN-LAST:event_ValiderActionPerformed
-   
+         
+        public int rechercherLocal()
+    { 
+      int i=-1;
+
+      try{
+  
+String query;
+      
+query= " SELECT idLocal FROM locaux  WHERE etageNumPorte = '"+etageNporteV+"' AND prix = '"+prixV+"' AND surface = '"+surfaceV+"' AND  nombrePieces = "+FiV+" AND etat = "+etatV+" AND description = '"+descriptionV+"'";
+ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
+ResultSet rs= ConxionBDD.stmt.executeQuery(query);
+while(rs.next()) i=rs.getInt(1);
+
+  }catch ( SQLException sqlException )
+    {  sqlException.printStackTrace(); }
+return i;
+}
+        
+        
    private String surfaceV;
    private String prixV;
    private String etageNporteV;
@@ -273,6 +306,7 @@ public class AjouterLocal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField prix;

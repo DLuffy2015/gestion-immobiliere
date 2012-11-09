@@ -108,8 +108,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel3" alignment="1" max="32767" attributes="0"/>
                                   <Component id="AjouLocal" max="32767" attributes="0"/>
-                                  <Component id="AjouLocataire" max="32767" attributes="0"/>
-                                  <Component id="AffLocal" max="32767" attributes="0"/>
+                                  <Component id="AjouLocataire" pref="143" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
@@ -147,9 +146,7 @@
                       <Component id="AjouLocal" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="AjouLocataire" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="AffLocal" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" pref="151" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
@@ -176,11 +173,6 @@
             <Component class="javax.swing.JButton" name="AjouLocataire">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ajouter un locataire"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="AffLocal">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Affichage les locataires"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="Apropo">
@@ -306,14 +298,14 @@
                                   <Component id="detailRecherche" min="-2" pref="146" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="50" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace pref="22" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="critereRechercher" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -322,7 +314,6 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="lancerRecherche" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
