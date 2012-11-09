@@ -58,6 +58,11 @@ public class AjouterLocal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         Annuler.setText("Annuler");
+        Annuler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AnnulerActionPerformed(evt);
+            }
+        });
 
         Valider.setText("Valider");
         Valider.addActionListener(new java.awt.event.ActionListener() {
@@ -249,21 +254,25 @@ public class AjouterLocal extends javax.swing.JFrame {
        if(!etageNporteV.equals("")){
            
            if(rechercherLocal()==-1){
-       query= "INSERT INTO location (etageNumPorte, prix, surface, etat, description, nombrePieces ) VALUES ('"+etageNporteV+"'," +prixV+"," +surfaceV+"," +etatV+",'"+descriptionV+"',"+FiV+")";
-        try {
-            
+       query= "INSERT INTO locaux (etageNumPorte, prix, surface, etat, description, nombrePieces ) VALUES ('"+etageNporteV+"'," +prixV+"," +surfaceV+"," +etatV+",'"+descriptionV+"',"+FiV+")";
+          try {
+          
             ConxionBDD.stmt.executeUpdate(query);
         } catch (SQLException ex) {
             Logger.getLogger(AjouterLocal.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-       // fermer la fenetre et initialiser celle du debut
-        
+    Principal.initTabLocaux( " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,locataire.nom FROM locaux LEFT JOIN locataire on locaux.locataire=locataire.id WHERE 1");
+    this.dispose();   
        }
            else{  jLabel8.setText(" Ce local existe déja!. ");
            }}
        
     }//GEN-LAST:event_ValiderActionPerformed
+
+    private void AnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnulerActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_AnnulerActionPerformed
          
         public int rechercherLocal()
     { 

@@ -22,7 +22,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-        initTabLocaux();
+        initTabLocaux( " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,locataire.nom FROM locaux LEFT JOIN locataire on locaux.locataire=locataire.id WHERE 1");
         initTabLocataires();
     }
 
@@ -35,6 +35,8 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        menuTabLocaux = new javax.swing.JPopupMenu();
+        AjoutLocation = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         AjouLocal = new javax.swing.JButton();
@@ -60,6 +62,14 @@ public class Principal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
+        AjoutLocation.setText("Modifier la location");
+        AjoutLocation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AjoutLocationActionPerformed(evt);
+            }
+        });
+        menuTabLocaux.add(AjoutLocation);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         AjouLocal.setText("Ajouter un local");
@@ -70,6 +80,11 @@ public class Principal extends javax.swing.JFrame {
         });
 
         AjouLocataire.setText("Ajouter un locataire");
+        AjouLocataire.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AjouLocataireActionPerformed(evt);
+            }
+        });
 
         Apropo.setText("A propos");
         Apropo.addActionListener(new java.awt.event.ActionListener() {
@@ -142,15 +157,37 @@ public class Principal extends javax.swing.JFrame {
         jTable1.setShowVerticalLines(false);
 
         jTable1.getTableHeader().setReorderingAllowed(false);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         lancerRecherche.setText("Lancer");
+        lancerRecherche.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lancerRechercheActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Recherche par:");
 
         critereRechercher.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Aucune", "Prix", "Nombre de pieces", "Disponibilité", "Non disponibilité" }));
+        critereRechercher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                critereRechercherActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Détail");
+
+        detailRecherche.setEnabled(false);
+        detailRecherche.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                detailRechercheActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -287,12 +324,76 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AjouLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AjouLocalActionPerformed
-        // TODO add your handling code here:
+   AjouterLocal local=new AjouterLocal();
+   local.setVisible(true);
     }//GEN-LAST:event_AjouLocalActionPerformed
 
     private void ApropoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApropoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ApropoActionPerformed
+
+    private void AjouLocataireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AjouLocataireActionPerformed
+        AjouterLocataire locataire=new AjouterLocataire();
+        locataire.setVisible(true);
+    }//GEN-LAST:event_AjouLocataireActionPerformed
+
+    private void critereRechercherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_critereRechercherActionPerformed
+        critereRech=critereRechercher.getSelectedIndex();
+        if(critereRech==0) {
+            detailRecherche.setEnabled(false);
+        }
+        else {
+            detailRecherche.setEnabled(true);
+        }
+    }//GEN-LAST:event_critereRechercherActionPerformed
+
+    private void detailRechercheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailRechercheActionPerformed
+detailRech=detailRecherche.getText();
+    }//GEN-LAST:event_detailRechercheActionPerformed
+
+    private void lancerRechercheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lancerRechercheActionPerformed
+        
+        if(critereRech!=0){
+//Aucune, Prix, Nombre de pieces, Disponibilité, Non disponibilité
+          
+    switch (critereRech)
+       {
+           case 1: 
+           {initTabLocaux( " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,locataire.nom FROM locaux LEFT JOIN locataire on locaux.locataire=locataire.id WHERE locaux.prix = '"+detailRech+"'");
+           }break;
+           case 2:
+           {initTabLocaux( " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,locataire.nom FROM locaux LEFT JOIN locataire on locaux.locataire=locataire.id WHERE locaux.nombrePieces = "+detailRech);
+           }break;
+           case 3:
+           {initTabLocaux( " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,locataire.nom FROM locaux LEFT JOIN locataire on locaux.locataire=locataire.id WHERE locaux.locataire = null");
+           }break;
+           case 4:
+           {initTabLocaux( " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,locataire.nom FROM locaux LEFT JOIN locataire on locaux.locataire=locataire.id WHERE locaux.locataire != null");
+           }break;
+        }    }
+            
+    }//GEN-LAST:event_lancerRechercheActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+    if((evt.getButton()==3)&&(jTable1.getSelectedRowCount()==1)){
+            menuTabLocaux.show(jTable1,evt.getX(),evt.getY());
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void AjoutLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AjoutLocationActionPerformed
+        try {
+            int det=jTable1.getSelectedRow() ;
+                  boolean rsVide=rsLocaux.first();
+                 if(rsVide){
+                   rsLocaux.absolute(det+1);
+                   Location location=new Location( rsLocaux.getInt(1));
+                   location.setVisible(true);
+                 }
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_AjoutLocationActionPerformed
 
     /**
      * @param args the command line arguments
@@ -329,8 +430,7 @@ public class Principal extends javax.swing.JFrame {
         });
     }
     
-    public void initTabLocaux(){
-  String  query= " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,locataire.nom FROM locaux LEFT JOIN locataire on locaux.locataire=locataire.id WHERE 1";
+    public static void initTabLocaux(String query){
         try {
             ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
             rsLocaux= ConxionBDD.stmt.executeQuery(query);
@@ -344,7 +444,7 @@ public class Principal extends javax.swing.JFrame {
 
             if(row>=jTable1.getRowCount())
             {
-            model1.insertRow(jTable1.getRowCount(),new Object[]{"","","",""});}
+            model.insertRow(jTable1.getRowCount(),new Object[]{"","","",""});}
             jTable1.setValueAt(rsLocaux.getString(2),row,0);
             jTable1.setValueAt(rsLocaux.getString(3),row,1);
             jTable1.setValueAt(rsLocaux.getString(4),row,2);
@@ -357,9 +457,9 @@ public class Principal extends javax.swing.JFrame {
         
     }
     
-    public void initTabLocataires(){
+    public static void initTabLocataires(){
     String query;
-query ="SELECT id, nom, telephone, mail, adresse FROM locataire WHERE "+1;
+query ="SELECT id, nom, telephone, mail, adresse FROM locataire WHERE 1";
         try {
               ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
               rsLocataires = ConxionBDD.stmt.executeQuery(query);
@@ -388,7 +488,7 @@ query ="SELECT id, nom, telephone, mail, adresse FROM locataire WHERE "+1;
     }   
     
     
-    DefaultTableModel model=new DefaultTableModel(
+   private static DefaultTableModel model=new DefaultTableModel(
     new Object [][] {
         {null, null, null, null}     
     },
@@ -404,7 +504,7 @@ query ="SELECT id, nom, telephone, mail, adresse FROM locataire WHERE "+1;
     }
 };
      
-    DefaultTableModel model1=new DefaultTableModel(
+  private static  DefaultTableModel model1=new DefaultTableModel(
     new Object [][] {
         {null, null, null, null}     
     },
@@ -419,11 +519,14 @@ query ="SELECT id, nom, telephone, mail, adresse FROM locataire WHERE "+1;
         return canEdit [columnIndex];
     }
 };
+    private int critereRech=0;
+    private String detailRech="";
     private static ResultSet rsLocaux;
-private static ResultSet rsLocataires;
+    private static ResultSet rsLocataires;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AjouLocal;
     private javax.swing.JButton AjouLocataire;
+    private javax.swing.JMenuItem AjoutLocation;
     private javax.swing.JButton Apropo;
     private javax.swing.JComboBox critereRechercher;
     private javax.swing.JTextField detailRecherche;
@@ -443,8 +546,9 @@ private static ResultSet rsLocataires;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private static javax.swing.JTable jTable1;
+    private static javax.swing.JTable jTable2;
     private javax.swing.JButton lancerRecherche;
+    private javax.swing.JPopupMenu menuTabLocaux;
     // End of variables declaration//GEN-END:variables
 }
