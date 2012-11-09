@@ -1,6 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * 
+ * 
  */
 package gestionimmobiliere;
 
@@ -14,31 +14,23 @@ import java.util.logging.Logger;
  *
  * @author imane
  */
+/**
+ * Cette classe permet de créer la fenêtre dans laquelle 
+ * on doit saisir les coordonnées d'un nouveau locataire à enregistrer.
+ * Elle contient un constructeur et une méthode de recherche.
+ * 
+ */
 public class AjouterLocataire extends javax.swing.JFrame {
 
     /**
-     * Creates new form AjouterLocataire
+     * C'est le constructeur de la classe
      */
     public AjouterLocataire() {
         initComponents();
     }
-private int rechercheNom( String nom){
-    int i=-1;
-    String query;
-query ="SELECT id FROM locataire WHERE nom = '"+nom+"'";
-        try {
-              ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
-              rs = ConxionBDD.stmt.executeQuery(query);
-        } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            while(rs.next()){i=rs.getInt(1);}
-        } catch (SQLException ex) {
-            Logger.getLogger(AjouterLocataire.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return i;
-}
+    
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -188,15 +180,15 @@ query ="SELECT id FROM locataire WHERE nom = '"+nom+"'";
     }// </editor-fold>//GEN-END:initComponents
 
     private void nomPrénomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomPrénomActionPerformed
-       nomV=nomPrénom.getText();
+       locataire.setNomV(nomPrénom.getText());
     }//GEN-LAST:event_nomPrénomActionPerformed
 
     private void mailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mailActionPerformed
-       mailV=mail.getText();
+       locataire.setMailV(mail.getText());
     }//GEN-LAST:event_mailActionPerformed
 
     private void téléphoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_téléphoneActionPerformed
-       téléphoneV=téléphone.getText();
+       locataire.setTéléphoneV(téléphone.getText());
     }//GEN-LAST:event_téléphoneActionPerformed
 
     private void annulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerActionPerformed
@@ -204,33 +196,21 @@ this.dispose();
     }//GEN-LAST:event_annulerActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    if(!nomV.equals("")){
-         if(rechercheNom(nomV)!=-1)
+    if(!(locataire.getNomV()).equals("")){
+         if(locataire.rechercheNom() !=-1)
                     {jLabel4.setText("Ce locataire est déjà enregistré");}
-         else{
-          String query="INSERT INTO locataire (nom, mail, telephone,adresse ) VALUES ('"+nomV+"','" +mailV+"','" +téléphoneV+"','"+adresseV+"')";
-      try {
-          
-            ConxionBDD.stmt.executeUpdate(query);
-        } catch (SQLException ex) {
-            Logger.getLogger(AjouterLocal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    Principal.initTabLocataires();
-    this.dispose();
+         else{locataire.insererLocataire();
+          Principal.initTabLocataires();
+          this.dispose();
          }}
     else jLabel4.setText("Le champs avec * est obligatoire!");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void adresseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adresseActionPerformed
-adresseV=adresse.getText();       
+locataire.setAdresseV(adresse.getText());       
     }//GEN-LAST:event_adresseActionPerformed
 
-    private ResultSet rs;
-    private String nomV="";
-    private String mailV="";
-    private String téléphoneV="";
-    private String adresseV="";
+    private Locataire locataire=new Locataire();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField adresse;
     private javax.swing.JButton annuler;
