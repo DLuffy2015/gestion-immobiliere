@@ -7,6 +7,7 @@ package gestionimmobiliere;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,13 +21,45 @@ public class Location extends javax.swing.JFrame {
     /**
      * Creates new form ModifierLocation
      */
-    public Location(String local) {
-        localV=local;
+    public Location(int idLocal) {
+        this.idLocal=idLocal;
         //manque les autres info a recuperer avec une requette
-        
         initComponents();
+    
+        String query =" SELECT locaux.etageNumPorte, locaux.surface,locaux.versement,locaux.prix,locaux.dateDebut,locaux.duree,locaux.description,locataire.nom FROM locaux LEFT JOIN locataire on locaux.locataire=locataire.id WHERE locaux.id = '"+idLocal+"'";
+        try {
+            ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
+             rs = ConxionBDD.stmt.executeQuery(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(Location.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            while(rs.next()){ 
+             locataire.setText(rs.getString(8));
+             local.setText(rs.getString(1));
+             surface.setText(rs.getString(2));
+             versement.setText(rs.getString(3));
+             if(!rs.getString(5).equals("")){dateDebut.setValue(convertirDate(rs.getString(5)));}
+             prix.setText(rs.getString(4));
+             duree.setText(rs.getString(6));
+             description.setText(rs.getString(7));
+                     }
+        } catch (SQLException ex) {
+            Logger.getLogger(Location.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
+    public java.util.Date convertirDate(String date) {
+     java.util.Date dateC=null;
+       
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            dateC= (java.util.Date) formatter.parse(date);
+        } catch (ParseException ex) {
+            Logger.getLogger(Location.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      return dateC;
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,11 +81,19 @@ public class Location extends javax.swing.JFrame {
         duree = new javax.swing.JTextField();
         valider = new javax.swing.JButton();
         annuler = new javax.swing.JButton();
-        jSpinner1 = new javax.swing.JSpinner(new javax.swing.SpinnerDateModel(new java.util.Date(), null, null, java.util.Calendar.DAY_OF_MONTH));
+        dateDebut = new javax.swing.JSpinner(new javax.swing.SpinnerDateModel(new java.util.Date(), null, null, java.util.Calendar.DAY_OF_MONTH));
+        jLabel6 = new javax.swing.JLabel();
+        prix = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        surface = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        description = new javax.swing.JTextArea();
+        msgErreur = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Locataire :");
+        jLabel1.setText("Locataire *:");
 
         locataire.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,7 +108,6 @@ public class Location extends javax.swing.JFrame {
                 localActionPerformed(evt);
             }
         });
-        local.setText(localV);
         local.setEditable(false);
 
         jLabel3.setText("Versement :");
@@ -96,14 +136,45 @@ public class Location extends javax.swing.JFrame {
         });
 
         annuler.setText("Annuler");
-
-        jSpinner1.setEditor(new javax.swing.JSpinner.DateEditor(jSpinner1, "yyyy-MM-dd"));
-        jSpinner1.setValue(dateC);
-        jSpinner1.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSpinner1StateChanged(evt);
+        annuler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                annulerActionPerformed(evt);
             }
         });
+
+        dateDebut.setEditor(new javax.swing.JSpinner.DateEditor(dateDebut, "yyyy-MM-dd"));
+        dateDebut.setValue(dateC);
+        dateDebut.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                dateDebutStateChanged(evt);
+            }
+        });
+
+        jLabel6.setText("Le prix:");
+
+        prix.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                prixActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Surface :");
+
+        surface.setEnabled(false);
+        surface.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                surfaceActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Description");
+
+        description.setColumns(20);
+        description.setRows(5);
+        jScrollPane1.setViewportView(description);
+
+        msgErreur.setText("le champs avec * est obligatoire!");
+        msgErreur.setToolTipText("");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -113,29 +184,46 @@ public class Location extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(duree, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(locataire, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                                .addComponent(local)
-                                .addComponent(versement))
-                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(166, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(valider)
-                .addGap(18, 18, 18)
-                .addComponent(annuler)
-                .addGap(18, 18, 18))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(dateDebut, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(duree))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(versement, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel6)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(prix, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(locataire, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                                        .addComponent(local, javax.swing.GroupLayout.Alignment.LEADING))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(surface, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel8))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(msgErreur, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(valider)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(annuler)))
+                        .addGap(18, 18, 18))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,23 +236,36 @@ public class Location extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(local, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(surface, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(versement, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(versement, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(prix, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dateDebut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(duree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(valider)
-                    .addComponent(annuler))
-                .addGap(29, 29, 29))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                        .addGap(58, 58, 58))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(annuler)
+                            .addComponent(valider)
+                            .addComponent(msgErreur))
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -173,8 +274,8 @@ public class Location extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,21 +289,25 @@ public class Location extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void validerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerActionPerformed
-       int id=rechercherLocataire();
+     
+        
+        int id=rechercherLocataire();
         if(id!=-1){
-     String query = "UPDATE locaux SET idLocataire = '"+id+"' ,versement = '"+versementV+"' , dateDebut = "+dateDebutV+" , duree = '"+dureeV+"' WHERE etageNumPorte = "+localV ;
+            String query = "UPDATE locaux SET idLocataire = '"+id+"' ,versement = '"+versementV+"' , dateDebut = "+dateDebutV+" ,prix='"+prixV+"' duree = '"+dureeV+"', description ='"+description.getText()+"' WHERE id = "+idLocal ;
             try {
                 ConxionBDD.stmt.executeUpdate(query);
             } catch (SQLException ex) {
                 Logger.getLogger(Location.class.getName()).log(Level.SEVERE, null, ex);
             }
-}
-       else{//locataire n existe pa re_inserer
+            Principal.initTabLocaux( " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,locataire.nom FROM locaux LEFT JOIN locataire on locaux.locataire=locataire.id WHERE 1");
+            this.dispose();
+                  }
+       else{msgErreur.setText("Veuiller saisir un locataire existant!");
         }
     }//GEN-LAST:event_validerActionPerformed
 
     private void locataireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locataireActionPerformed
-      locataireV=locataire.getText();  
+    locataireV=locataire.getText(); 
     }//GEN-LAST:event_locataireActionPerformed
 
     private void localActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_localActionPerformed
@@ -217,13 +322,24 @@ public class Location extends javax.swing.JFrame {
         dureeV=duree.getText();       
     }//GEN-LAST:event_dureeActionPerformed
 
-    private void jSpinner1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner1StateChanged
-      Object d= jSpinner1.getValue();
-     
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private void dateDebutStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_dateDebutStateChanged
+      Object d= dateDebut.getValue();
+      SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
          dateDebutV = simpleDateFormat.format(d);
        
-    }//GEN-LAST:event_jSpinner1StateChanged
+    }//GEN-LAST:event_dateDebutStateChanged
+
+    private void prixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prixActionPerformed
+       prixV=prix.getText(); 
+    }//GEN-LAST:event_prixActionPerformed
+
+    private void surfaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surfaceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_surfaceActionPerformed
+
+    private void annulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerActionPerformed
+      this.dispose();
+    }//GEN-LAST:event_annulerActionPerformed
     public int rechercherLocataire()
     { 
       int i=-1;
@@ -238,7 +354,7 @@ public class Location extends javax.swing.JFrame {
                                             {  sqlException.printStackTrace(); }
       return i;
      }
-    
+    private  ResultSet rs;
     java.util.GregorianCalendar calender=new java.util.GregorianCalendar();
      private Object dateC=calender.getTime();
      private String locataireV="";
@@ -246,18 +362,30 @@ public class Location extends javax.swing.JFrame {
      private String versementV="";
      private String dureeV="";
      private String dateDebutV;
+     private String prixV;
+     private int idLocal;
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton annuler;
+    private javax.swing.JSpinner dateDebut;
+    private javax.swing.JTextArea description;
     private javax.swing.JTextField duree;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField local;
     private javax.swing.JTextField locataire;
+    private javax.swing.JLabel msgErreur;
+    private javax.swing.JTextField prix;
+    private javax.swing.JTextField surface;
     private javax.swing.JButton valider;
     private javax.swing.JTextField versement;
     // End of variables declaration//GEN-END:variables
