@@ -17,8 +17,9 @@ import org.junit.BeforeClass;
  * @author user
  */
 public class LocationTest {
-    
+     Location instance;
     public LocationTest() {
+        instance=new Location();
     }
     
     @BeforeClass
@@ -43,12 +44,10 @@ public class LocationTest {
     @Test
     public void testGetLocataire() {
         System.out.println("getLocataire");
-        Location instance = new Location();
         Locataire expResult = null;
         Locataire result = instance.getLocataire();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
@@ -57,11 +56,10 @@ public class LocationTest {
     @Test
     public void testSetLocataire() {
         System.out.println("setLocataire");
-        Locataire locataire = null;
-        Location instance = new Location();
+        Locataire locataire = new Locataire();
         instance.setLocataire(locataire);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Locataire result = instance.getLocataire();
+        assertEquals(locataire, instance);
     }
 
     /**
@@ -70,12 +68,10 @@ public class LocationTest {
     @Test
     public void testGetLocal() {
         System.out.println("getLocal");
-        Location instance = new Location();
         Local expResult = null;
         Local result = instance.getLocal();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -84,11 +80,10 @@ public class LocationTest {
     @Test
     public void testSetLocal() {
         System.out.println("setLocal");
-        Local local = null;
-        Location instance = new Location();
+        Local local = new Local();
         instance.setLocal(local);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Local result = instance.getLocal();
+        assertEquals(local, result);
     }
 
     /**
@@ -111,7 +106,7 @@ public class LocationTest {
     public void testConvertirDate() {
         System.out.println("convertirDate string=>date");
         String date = "2012-11-10";
-        Date expResult = new java.util.Date(date);
+        Date expResult = new java.util.Date(112,11,10);
         Date result = Location.convertirDate(date);
         assertEquals(expResult, result);
        
