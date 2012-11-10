@@ -1,4 +1,4 @@
-/*2
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -72,7 +72,7 @@ public class Locataire {
       int i=-1;
     try{
             String query;
-            query= " SELECT idLocataire FROM locataire  WHERE nomPrenom = '"+this.getNomV()+"'";
+            query= " SELECT idLocataire FROM locataire  WHERE nomPrenom = '"+this.nomV+"'";
             ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
              ResultSet rs= ConxionBDD.stmt.executeQuery(query);
             while(rs.next()) i=rs.getInt(1);
@@ -83,19 +83,7 @@ public class Locataire {
      }
      
      
-    public int rechercheNom(){//retourn l id du locale sous critere nom
-    int i=-1;
-    ResultSet rs = null;
-    String query ="SELECT id FROM locataire WHERE nom = '"+this.nomV+"'";
-        try {
-              ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
-              rs = ConxionBDD.stmt.executeQuery(query);
-              while(rs.next()){i=rs.getInt(1);}
-        } catch (SQLException ex) {
-            Logger.getLogger(AjouterLocataire.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return i;
-}
+
     public void insererLocataire(){
     String query="INSERT INTO locataire (nom, mail, telephone,adresse ) VALUES ('"+this.nomV+"','" +this.mailV+"','" +this.téléphoneV+"','"+this.adresseV+"')";
       try {

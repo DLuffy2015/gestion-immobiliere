@@ -192,7 +192,7 @@ this.dispose();
 
     private void validerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerActionPerformed
     if(!(locataire.getNomV()).equals("")){
-         if(locataire.rechercheNom() !=-1)
+         if(locataire.rechercherLocataire() !=-1)
                     {jLabel4.setText("Ce locataire est déjà enregistré");}
          else{locataire.insererLocataire();
           Principal.initTabLocataires();
