@@ -111,7 +111,7 @@ public class LocataireTest {
      */
     @Test
     public void testSetTéléphoneV() {
-        System.out.println("setT\u00e9l\u00e9phoneV");
+        System.out.println("setTphoneV");
         String téléphoneV = "";
         Locataire instance = new Locataire();
         instance.setTéléphoneV(téléphoneV);
@@ -146,19 +146,6 @@ public class LocataireTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of rechercheNom method, of class Locataire.
-     */
-    @Test
-    public void testRechercheNom() {
-        System.out.println("rechercheNom");
-        Locataire instance = new Locataire();
-        int expResult = 1;//id
-        instance.setNomV("Tebbi souad");
-        int result = instance.rechercheNom();
-        assertEquals(expResult, result);
-       
-    }
 
     /**
      * Test of insererLocataire method, of class Locataire.
@@ -166,10 +153,13 @@ public class LocataireTest {
     @Test
     public void testInsererLocataire() {
         System.out.println("insererLocataire");
-        Locataire instance = new Locataire("meddahi imane","ai_meddahi@esi.dz","05553669877","Dar el beida");
-       instance.insererLocataire();
-      // on peut utilisé recherche  nom
-        
+        Locataire instance = new Locataire("meddahi imane","ai_meddahi@esi.dz","portable:05553669877","Dar el beida");
+        instance.insererLocataire();
+       
+        // on peut utilisé recherche  nom
+        int expResult = -1;//id du locataire 
+        int result = instance.rechercherLocataire();
+        //assertEquals(expResult, result); comment verifier != -1
     }
 
     /**
@@ -177,14 +167,14 @@ public class LocataireTest {
      */
     @Test
     public void testRechercherLocataire() {
-        System.out.println("rechercherLocataire");
+        System.out.println("rechercherLocataire (n'existe pas)");
         Locataire instance = new Locataire();
         instance.setNomV("Samia B");
-        int expResult = -1;
+        int expResult = -1;//id du locataire
         int result = instance.rechercherLocataire();
         assertEquals(expResult, result);
        
-         System.out.println("rechercherLocataire");
+         System.out.println("rechercherLocataire (existe)");
          instance.setNomV("Tebbi souad");
          expResult = 1;
          result = instance.rechercherLocataire();

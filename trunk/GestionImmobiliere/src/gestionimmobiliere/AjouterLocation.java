@@ -1,16 +1,10 @@
-/*2
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package gestionimmobiliere;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 
 /**
  *
@@ -22,31 +16,19 @@ public class AjouterLocation extends javax.swing.JFrame {
      * Creates new form ModifierLocation
      */
     public AjouterLocation(int idLocal) {
-        location.getLocal().setIdLocal(idLocal);
-        initComponents();
-    
-        String query =" SELECT locaux.etageNumPorte, locaux.surface,locaux.versement,locaux.prix,locaux.dateDebut,locaux.duree,locaux.description,locataire.nom FROM locaux LEFT JOIN locataire on locaux.locataire=locataire.id WHERE locaux.id = '"+idLocal+"'";
-        try {
-            ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
-             rs = ConxionBDD.stmt.executeQuery(query);
-        } catch (SQLException ex) {
-            Logger.getLogger(AjouterLocation.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            while(rs.next()){ 
-             locataire.setText(rs.getString(8));
-             local.setText(rs.getString(1));
-             surface.setText(rs.getString(2));
-             versement.setText(rs.getString(3));
-             if(!rs.getString(5).equals("")){dateDebut.setValue(Location.convertirDate(rs.getString(5)));}
-             prix.setText(rs.getString(4));
-             duree.setText(rs.getString(6));
-             description.setText(rs.getString(7));
-                     }
-        } catch (SQLException ex) {
-            Logger.getLogger(AjouterLocation.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+             initComponents();
+             location.getLocal().setIdLocal(idLocal);
+             location.initialiserLocation();
+              
+             locataire.setText(location.getLocataire().getNomV());
+             local.setText(location.getLocal().getEtageNporteV());
+             surface.setText(location.getLocal().getSurfaceV());
+             versement.setText(location.getLocal().getVersementV());
+             if(!location.getLocal().getDateDebutV().equals("")){dateDebut.setValue(Location.convertirDate(location.getLocal().getDateDebutV()));}
+             prix.setText(location.getLocal().getPrixV());
+             duree.setText(location.getLocal().getDureeV());
+             description.setText(location.getLocal().getDescriptionV());
+                                       }
 
   
     /**
@@ -294,18 +276,20 @@ public class AjouterLocation extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void validerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerActionPerformed
-       (location.getLocal()).setLocataireV(location.getLocataire().rechercherLocataire());
-        if(location.getLocataire().rechercherLocataire()!=-1){
-            location.miseAJourLocal();
-            Principal.initTabLocaux( " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,locataire.nom FROM locaux LEFT JOIN locataire on locaux.locataire=locataire.id WHERE 1");
-            this.dispose();
-                  }
-       else{msgErreur.setText("Veuiller saisir un locataire existant!");
-        }
+           
+        
+        int id= location.getLocataire().rechercherLocataire(); 
+        if(id !=-1){
+                 location.getLocal().setLocataireV(id);
+                 location.miseAJourLocal();
+                 Principal.initTabLocaux( " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,locataire.nom FROM locaux LEFT JOIN locataire on locaux.locataire=locataire.id WHERE 1");
+                 this.dispose();}
+             else{ 
+                 msgErreur.setText("Veuiller saisir un locataire existant!"); }
     }//GEN-LAST:event_validerActionPerformed
 
     private void locataireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locataireActionPerformed
-    location.getLocataire().setNomV(locataire.getText());
+         location.getLocataire().setNomV(locataire.getText());
     }//GEN-LAST:event_locataireActionPerformed
 
     private void localActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_localActionPerformed
@@ -313,7 +297,7 @@ public class AjouterLocation extends javax.swing.JFrame {
     }//GEN-LAST:event_localActionPerformed
 
     private void versementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_versementActionPerformed
-       location.getLocal().setVersementV(versement.getText());
+        location.getLocal().setVersementV(versement.getText());
         
     }//GEN-LAST:event_versementActionPerformed
 
@@ -323,14 +307,14 @@ public class AjouterLocation extends javax.swing.JFrame {
     }//GEN-LAST:event_dureeActionPerformed
 
     private void dateDebutStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_dateDebutStateChanged
-     Object d= dateDebut.getValue();
-      SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-         location.getLocal().setDateDebutV(simpleDateFormat.format(d));
+        Object d= dateDebut.getValue();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        location.getLocal().setDateDebutV(simpleDateFormat.format(d));
        
     }//GEN-LAST:event_dateDebutStateChanged
 
     private void prixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prixActionPerformed
-       location.getLocal().setPrixV(prix.getText()); 
+        location.getLocal().setPrixV(prix.getText()); 
     }//GEN-LAST:event_prixActionPerformed
 
     private void surfaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surfaceActionPerformed
@@ -341,7 +325,7 @@ public class AjouterLocation extends javax.swing.JFrame {
       this.dispose();
     }//GEN-LAST:event_annulerActionPerformed
     
-    private  ResultSet rs;
+   
     java.util.GregorianCalendar calender=new java.util.GregorianCalendar();
      private Object dateC=calender.getTime();
     private Location location=new Location();
