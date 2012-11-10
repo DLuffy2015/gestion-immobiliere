@@ -1,16 +1,11 @@
-/*    
+/*  1  
  * 
  *
  * 
  */
 package gestionimmobiliere;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -222,7 +217,7 @@ public class AjouterLocal extends javax.swing.JFrame {
     }//GEN-LAST:event_surfaceActionPerformed
 
     private void adresseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adresseActionPerformed
-  local.setEtageNporteV(adresse.getText());      
+        local.setEtageNporteV(adresse.getText());      
     }//GEN-LAST:event_adresseActionPerformed
 
     private void prixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prixActionPerformed

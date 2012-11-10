@@ -1,4 +1,4 @@
-/*
+/*2
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -7,11 +7,10 @@ package gestionimmobiliere;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -295,9 +294,7 @@ public class AjouterLocation extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void validerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerActionPerformed
-     
-        
-        (location.getLocal()).setLocataireV(location.getLocataire().rechercherLocataire());
+       (location.getLocal()).setLocataireV(location.getLocataire().rechercherLocataire());
         if(location.getLocataire().rechercherLocataire()!=-1){
             location.miseAJourLocal();
             Principal.initTabLocaux( " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,locataire.nom FROM locaux LEFT JOIN locataire on locaux.locataire=locataire.id WHERE 1");
@@ -337,7 +334,7 @@ public class AjouterLocation extends javax.swing.JFrame {
     }//GEN-LAST:event_prixActionPerformed
 
     private void surfaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surfaceActionPerformed
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_surfaceActionPerformed
 
     private void annulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerActionPerformed

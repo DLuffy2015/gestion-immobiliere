@@ -1,12 +1,11 @@
-/*
+/*2
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package gestionimmobiliere;
 
-import java.sql.ResultSet;
+
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
