@@ -16,20 +16,26 @@ import static org.junit.Assert.*;
  * @author user
  */
 public class LocalTest {
-    
+    Local instance;
     public LocalTest() {
+   instance =new Local(3,"2emme etage N°3","120M²",5,"45milles dinars","prix négociable","2012/11/10","5 mois ","1000dinars",4);
+   
     }
     
     @BeforeClass
     public static void setUpClass() {
+        ConxionBDD.connect();
+        
     }
     
     @AfterClass
     public static void tearDownClass() {
+        ConxionBDD.close();
     }
     
     @Before
     public void setUp() {
+        
     }
     
     @After
@@ -39,55 +45,53 @@ public class LocalTest {
     /**
      * Test of getIdLocal method, of class Local.
      */
-    @Test
+      @Test
     public void testGetIdLocal() {
-        System.out.println("getIdLocal");
-        Local instance = new Local();
-        int expResult = 0;
+        System.out.println("getEtageNporteV");
+        int expResult = 3;
         int result = instance.getIdLocal();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
      * Test of setIdLocal method, of class Local.
-     */
+    */
     @Test
     public void testSetIdLocal() {
         System.out.println("setIdLocal");
-        int idLocal = 0;
+        int expResult = 4;
         Local instance = new Local();
-        instance.setIdLocal(idLocal);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.setIdLocal(expResult);
+        int result = instance.getIdLocal();
+        assertEquals(expResult, result);
     }
-
+ 
     /**
      * Test of getEtageNporteV method, of class Local.
      */
-    @Test
+     @Test
     public void testGetEtageNporteV() {
-        System.out.println("getEtageNporteV");
-        Local instance = new Local();
-        String expResult = "";
+
+        System.out.println("getIdLocal");
+        String expResult = "2emme etage N°3";
         String result = instance.getEtageNporteV();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+      
     }
+   
+     
 
     /**
      * Test of setEtageNporteV method, of class Local.
-     */
+     */ 
     @Test
     public void testSetEtageNporteV() {
-        System.out.println("setEtageNporteV");
-        String etageNporteV = "";
-        Local instance = new Local();
-        instance.setEtageNporteV(etageNporteV);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+         System.out.println("setEtageNporteV");
+         String etageNporteV = "4emme etage N°8";
+         instance.setEtageNporteV(etageNporteV);
+         String result = instance.getEtageNporteV();
+         assertEquals(etageNporteV, result);
     }
 
     /**
@@ -96,25 +100,24 @@ public class LocalTest {
     @Test
     public void testGetSurfaceV() {
         System.out.println("getSurfaceV");
-        Local instance = new Local();
-        String expResult = "";
+        String expResult = "120M²";
         String result = instance.getSurfaceV();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
-
+   
+   
+         
     /**
      * Test of setSurfaceV method, of class Local.
      */
     @Test
     public void testSetSurfaceV() {
         System.out.println("setSurfaceV");
-        String surfaceV = "";
-        Local instance = new Local();
+        String surfaceV = "76 M²";
         instance.setSurfaceV(surfaceV);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String result = instance.getSurfaceV();
+        assertEquals(surfaceV, result);
     }
 
     /**
@@ -123,12 +126,10 @@ public class LocalTest {
     @Test
     public void testGetFiV() {
         System.out.println("getFiV");
-        Local instance = new Local();
-        int expResult = 0;
+        int expResult = 5;
         int result = instance.getFiV();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
@@ -137,7 +138,7 @@ public class LocalTest {
     @Test
     public void testSetFiV() {
         System.out.println("setFiV");
-        int FiV = 0;
+        int FiV = 4;
         Local instance = new Local();
         instance.setFiV(FiV);
         // TODO review the generated test code and remove the default call to fail.
@@ -150,25 +151,20 @@ public class LocalTest {
     @Test
     public void testGetPrixV() {
         System.out.println("getPrixV");
-        Local instance = new Local();
-        String expResult = "";
+        String expResult = "45milles dinars";
         String result = instance.getPrixV();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
-
-    /**
+  /**
      * Test of setPrixV method, of class Local.
      */
     @Test
     public void testSetPrixV() {
         System.out.println("setPrixV");
-        String prixV = "";
-        Local instance = new Local();
-        instance.setPrixV(prixV);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String prixV = "44milles dinars";
+         instance.setPrixV(prixV);
+        
     }
 
     /**
@@ -178,38 +174,36 @@ public class LocalTest {
     public void testGetDescriptionV() {
         System.out.println("getDescriptionV");
         Local instance = new Local();
-        String expResult = "";
+        String expResult = "prix négociable";
         String result = instance.getDescriptionV();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
-
+   
+        
+  
     /**
      * Test of setDescriptionV method, of class Local.
      */
     @Test
     public void testSetDescriptionV() {
         System.out.println("setDescriptionV");
-        String descriptionV = "";
+        String descriptionV = "belle appartement ";
         Local instance = new Local();
         instance.setDescriptionV(descriptionV);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
-
-    /**
+   /**
      * Test of getDateDebutV method, of class Local.
      */
     @Test
     public void testGetDateDebutV() {
         System.out.println("getDateDebutV");
         Local instance = new Local();
-        String expResult = "";
+        String expResult = "2012/11/10";
         String result = instance.getDateDebutV();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
@@ -218,11 +212,10 @@ public class LocalTest {
     @Test
     public void testSetDateDebutV() {
         System.out.println("setDateDebutV");
-        String dateDebutV = "";
+        String dateDebutV = "2012/11/13";
         Local instance = new Local();
         instance.setDateDebutV(dateDebutV);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
@@ -232,11 +225,10 @@ public class LocalTest {
     public void testGetDureeV() {
         System.out.println("getDureeV");
         Local instance = new Local();
-        String expResult = "";
+        String expResult = "5 mois";
         String result = instance.getDureeV();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
@@ -245,38 +237,23 @@ public class LocalTest {
     @Test
     public void testSetDureeV() {
         System.out.println("setDureeV");
-        String dureeV = "";
+        String dureeV = "2 mois";
         Local instance = new Local();
         instance.setDureeV(dureeV);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-
-    /**
-     * Test of getVersementV method, of class Local.
-     */
-    @Test
-    public void testGetVersementV() {
-        System.out.println("getVersementV");
-        Local instance = new Local();
-        String expResult = "";
-        String result = instance.getVersementV();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
+ 
     /**
      * Test of setVersementV method, of class Local.
      */
     @Test
     public void testSetVersementV() {
         System.out.println("setVersementV");
-        String versementV = "";
+        String versementV = "50 Milles dinars";
         Local instance = new Local();
-        instance.setVersementV(versementV);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.setVersementV("50 Milles dinars");
+        assertEquals(versementV, instance.getVersementV());
     }
 
     /**
@@ -286,6 +263,7 @@ public class LocalTest {
     public void testGetLocataireV() {
         System.out.println("getLocataireV");
         Local instance = new Local();
+        
         int expResult = 0;
         int result = instance.getLocataireV();
         assertEquals(expResult, result);
@@ -293,29 +271,27 @@ public class LocalTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of setLocataireV method, of class Local.
-     */
-    @Test
-    public void testSetLocataireV() {
-        System.out.println("setLocataireV");
-        int locataireV = 0;
-        Local instance = new Local();
-        instance.setLocataireV(locataireV);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of insererLocal method, of class Local.
      */
     @Test
     public void testInsererLocal() {
+ //"INSERT INTO locaux  ('"+this.etageNporteV+"','" +this.prixV+"','" +this.surfaceV+"','"+this.descriptionV+"',"+this.FiV+")";
         System.out.println("insererLocal");
         Local instance = new Local();
+        
+        instance.setSurfaceV("80 M²");   
+        instance.setEtageNporteV("2emme Etage N°5");
+        instance.setPrixV("25milles dinars");
+        instance.setFiV(4);
+        instance.setDescriptionV("Une belle appartement meublé");
+        
         instance.insererLocal();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int expResult = -1;
+        int result = instance.rechercherLocal();
+        assertEquals(expResult, result);//la difference 
+        
     }
 
     /**
@@ -323,12 +299,18 @@ public class LocalTest {
      */
     @Test
     public void testRechercherLocal() {
+//" SELECT idLocal FROM locaux  WHERE etageNumPorte = '"+this.etageNporteV+"' AND prix = "+this.prixV+" AND surface = "+this.surfaceV+" AND  nombrePieces = "+this.FiV+" AND description = '"+this.descriptionV+"'";     
         System.out.println("rechercherLocal");
+        
         Local instance = new Local();
-        int expResult = 0;
+       
+        instance.setSurfaceV("100 M²");   
+        instance.setEtageNporteV("6emme Etage N°12");
+        instance.setPrixV("33milles dinars");
+        instance.setFiV(5);
+        instance.setDescriptionV("Une belle appartement meublé");
+        int expResult = 1;
         int result = instance.rechercherLocal();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+          }
 }

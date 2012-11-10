@@ -7,10 +7,10 @@ package gestionimmobiliere;
 import java.util.Date;
 import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.BeforeClass;
 
 /**
  *
@@ -98,6 +98,7 @@ public class LocationTest {
     public void testMiseAJourLocal() {
         System.out.println("miseAJourLocal");
         Location instance = new Location();
+        //init instance puis enregistrere et appré recuperer est verifier
         instance.miseAJourLocal();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -108,12 +109,13 @@ public class LocationTest {
      */
     @Test
     public void testConvertirDate() {
-        System.out.println("convertirDate");
-        String date = "";
-        Date expResult = null;
+        System.out.println("convertirDate string=>date");
+        String date = "2012-11-10";
+        Date expResult = new java.util.Date(date);
         Date result = Location.convertirDate(date);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
+        
+        
     }
 }

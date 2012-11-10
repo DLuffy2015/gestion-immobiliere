@@ -1,14 +1,9 @@
-/*
+/*1
  * 
  * 
  */
 package gestionimmobiliere;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -41,7 +36,7 @@ public class AjouterLocataire extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        valider = new javax.swing.JButton();
         annuler = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         nomPrénom = new javax.swing.JTextField();
@@ -55,10 +50,10 @@ public class AjouterLocataire extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Valider");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        valider.setText("Valider");
+        valider.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                validerActionPerformed(evt);
             }
         });
 
@@ -113,7 +108,7 @@ public class AjouterLocataire extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)
+                        .addComponent(valider)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(annuler)
                         .addGap(31, 31, 31))
@@ -153,7 +148,7 @@ public class AjouterLocataire extends javax.swing.JFrame {
                     .addComponent(adresse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(valider)
                     .addComponent(annuler)
                     .addComponent(jLabel4))
                 .addContainerGap())
@@ -195,7 +190,7 @@ public class AjouterLocataire extends javax.swing.JFrame {
 this.dispose();
     }//GEN-LAST:event_annulerActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void validerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerActionPerformed
     if(!(locataire.getNomV()).equals("")){
          if(locataire.rechercheNom() !=-1)
                     {jLabel4.setText("Ce locataire est déjà enregistré");}
@@ -204,7 +199,7 @@ this.dispose();
           this.dispose();
          }}
     else jLabel4.setText("Le champs avec * est obligatoire!");
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_validerActionPerformed
 
     private void adresseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adresseActionPerformed
 locataire.setAdresseV(adresse.getText());       
@@ -214,7 +209,6 @@ locataire.setAdresseV(adresse.getText());
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField adresse;
     private javax.swing.JButton annuler;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -224,5 +218,6 @@ locataire.setAdresseV(adresse.getText());
     private javax.swing.JTextField mail;
     private javax.swing.JTextField nomPrénom;
     private javax.swing.JTextField téléphone;
+    private javax.swing.JButton valider;
     // End of variables declaration//GEN-END:variables
 }

@@ -21,11 +21,13 @@ public class LocataireTest {
     }
     
     @BeforeClass
-    public static void setUpClass() {
+    public static void setUpClass() 
+    {ConxionBDD.connect();
     }
     
     @AfterClass
     public static void tearDownClass() {
+        ConxionBDD.close();
     }
     
     @Before
@@ -151,11 +153,11 @@ public class LocataireTest {
     public void testRechercheNom() {
         System.out.println("rechercheNom");
         Locataire instance = new Locataire();
-        int expResult = 0;
+        int expResult = 1;//id
+        instance.setNomV("Tebbi souad");
         int result = instance.rechercheNom();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
@@ -164,10 +166,10 @@ public class LocataireTest {
     @Test
     public void testInsererLocataire() {
         System.out.println("insererLocataire");
-        Locataire instance = new Locataire();
-        instance.insererLocataire();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Locataire instance = new Locataire("meddahi imane","ai_meddahi@esi.dz","05553669877","Dar el beida");
+       instance.insererLocataire();
+      // on peut utilisé recherche  nom
+        
     }
 
     /**
@@ -177,10 +179,16 @@ public class LocataireTest {
     public void testRechercherLocataire() {
         System.out.println("rechercherLocataire");
         Locataire instance = new Locataire();
-        int expResult = 0;
+        instance.setNomV("Samia B");
+        int expResult = -1;
         int result = instance.rechercherLocataire();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
+         System.out.println("rechercherLocataire");
+         instance.setNomV("Tebbi souad");
+         expResult = 1;
+         result = instance.rechercherLocataire();
+         assertEquals(expResult, result);
+        
     }
 }

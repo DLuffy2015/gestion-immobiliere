@@ -1,4 +1,4 @@
-/*
+/*2
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -26,6 +26,20 @@ public class Local {
    private String versementV;
    private int locataireV;
 
+   
+   public Local(int idLocal,String etageNporteV,String surfaceV,int FiV,String prixV,String descriptionV,String dateDebutV,String dureeV,String versementV,int locataireV){
+   this.idLocal=idLocal;
+   this.etageNporteV=etageNporteV;
+   this.surfaceV=surfaceV;
+   this.FiV=FiV;
+   this.prixV=prixV;
+   this.descriptionV=descriptionV;  
+   this.dateDebutV=dateDebutV;
+   this.dureeV=dureeV;
+   this.versementV=versementV;
+   this.locataireV=locataireV;}
+   
+   public Local(){};
     public int getIdLocal() {
         return idLocal;
     }

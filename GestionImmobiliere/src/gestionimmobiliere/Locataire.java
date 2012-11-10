@@ -1,4 +1,4 @@
-/*
+/*2
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -21,6 +21,14 @@ public class Locataire {
     private String téléphoneV="";
     private String adresseV="";
 
+    public Locataire(String nom,String mail, String telephone, String adresse)
+    {nomV=nom;
+    mailV=mail;
+    téléphoneV=telephone;
+    adresseV=adresse;
+    }
+    public Locataire(){};
+    
     public String getNomV() {
         return nomV;
     }
@@ -59,18 +67,30 @@ public class Locataire {
  * sinon, elle retourne l'id du dernier locataire existant dans la table 'locataire'.
  * @return 
  */ 
-    public int rechercheNom(){
+     public int rechercherLocataire()//recherche l id de locataire avec critere nom
+    { 
+      int i=-1;
+    try{
+            String query;
+            query= " SELECT idLocataire FROM locataire  WHERE nomPrenom = '"+this.getNomV()+"'";
+            ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
+             ResultSet rs= ConxionBDD.stmt.executeQuery(query);
+            while(rs.next()) i=rs.getInt(1);
+
+        }catch ( SQLException sqlException )
+                                            {  sqlException.printStackTrace(); }
+      return i;
+     }
+     
+     
+    public int rechercheNom(){//retourn l id du locale sous critere nom
     int i=-1;
     ResultSet rs = null;
     String query ="SELECT id FROM locataire WHERE nom = '"+this.nomV+"'";
         try {
               ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
               rs = ConxionBDD.stmt.executeQuery(query);
-        } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            while(rs.next()){i=rs.getInt(1);}
+              while(rs.next()){i=rs.getInt(1);}
         } catch (SQLException ex) {
             Logger.getLogger(AjouterLocataire.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -88,18 +108,5 @@ public class Locataire {
     
     }
     
-    public int rechercherLocataire()
-    { 
-      int i=-1;
-    try{
-            String query;
-            query= " SELECT idLocataire FROM locataire  WHERE nomPrenom = '"+this.getNomV()+"'";
-            ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
-             ResultSet rs= ConxionBDD.stmt.executeQuery(query);
-            while(rs.next()) i=rs.getInt(1);
-
-        }catch ( SQLException sqlException )
-                                            {  sqlException.printStackTrace(); }
-      return i;
-     }
+   
 }
