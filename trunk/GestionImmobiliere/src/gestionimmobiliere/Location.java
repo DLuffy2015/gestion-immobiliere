@@ -19,6 +19,12 @@ public class Location {
     private Locataire locataire;
     private Local local;
 
+     public Location(Locataire locataire,Local local){
+     this.locataire=locataire;
+     this.local=local;
+     }
+     public Location(){}
+     
     public Locataire getLocataire() {
         return locataire;
     }
