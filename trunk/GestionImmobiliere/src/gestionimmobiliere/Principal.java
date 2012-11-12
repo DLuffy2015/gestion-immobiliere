@@ -22,7 +22,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-        initTabLocaux( " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,locataire.nom FROM locaux LEFT JOIN locataire on locaux.locataire=locataire.id WHERE 1");
+        initTabLocaux( " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,agence_immobiliere.locataire.nom FROM locaux LEFT JOIN locataire on agence_immobiliere.locaux.locataire=agence_immobiliere.locataire.id WHERE 1");
         initTabLocataires();
     }
 
@@ -430,6 +430,7 @@ detailRech=detailRecherche.getText();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                ConxionBDD.connect();
                 new Principal().setVisible(true);
             }
         });
@@ -437,7 +438,7 @@ detailRech=detailRecherche.getText();
     
     public static void initTabLocaux(String query){
         try {
-            ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
+            //ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
             rsLocaux= ConxionBDD.stmt.executeQuery(query);
         } catch (SQLException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);

@@ -48,8 +48,7 @@ public class LocataireTest {
         String expResult = "";
         String result = instance.getNomV();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -61,8 +60,7 @@ public class LocataireTest {
         String nomV = "";
         Locataire instance = new Locataire();
         instance.setNomV(nomV);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
@@ -75,8 +73,7 @@ public class LocataireTest {
         String expResult = "";
         String result = instance.getMailV();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
@@ -88,8 +85,7 @@ public class LocataireTest {
         String mailV = "";
         Locataire instance = new Locataire();
         instance.setMailV(mailV);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+      
     }
 
     /**
@@ -102,8 +98,7 @@ public class LocataireTest {
         String expResult = "";
         String result = instance.getTéléphoneV();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -115,8 +110,7 @@ public class LocataireTest {
         String téléphoneV = "";
         Locataire instance = new Locataire();
         instance.setTéléphoneV(téléphoneV);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
@@ -129,8 +123,7 @@ public class LocataireTest {
         String expResult = "";
         String result = instance.getAdresseV();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
@@ -142,8 +135,7 @@ public class LocataireTest {
         String adresseV = "";
         Locataire instance = new Locataire();
         instance.setAdresseV(adresseV);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
 
@@ -155,8 +147,6 @@ public class LocataireTest {
         System.out.println("insererLocataire");
         Locataire instance = new Locataire("meddahi imane","ai_meddahi@esi.dz","portable:05553669877","Dar el beida");
         instance.insererLocataire();
-       
-        // on peut utilisé recherche  nom
         int expResult = -1;//id du locataire 
         int result = instance.rechercherLocataire();
         //assertEquals(expResult, result); comment verifier != -1
