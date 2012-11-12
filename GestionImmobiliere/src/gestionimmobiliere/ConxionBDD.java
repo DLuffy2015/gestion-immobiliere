@@ -6,7 +6,7 @@ package gestionimmobiliere;
 
 import java.sql.*;
 import javax.swing.*;
-import java.util.*;
+
 /**
  *
  * @author user
@@ -28,7 +28,7 @@ public class ConxionBDD {
 
 
 public static void connect() {
-   String url = "jdbc:mysql://localhost:3306/agenda";
+   String url = "jdbc:mysql://localhost:3306/agence_immobiliere ";
 
     try {
             // establish connection to database   url , user , password

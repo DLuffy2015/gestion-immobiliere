@@ -141,8 +141,7 @@ public class LocalTest {
         int FiV = 4;
         Local instance = new Local();
         instance.setFiV(FiV);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -240,8 +239,7 @@ public class LocalTest {
         String dureeV = "2 mois";
         Local instance = new Local();
         instance.setDureeV(dureeV);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
  
     /**
@@ -267,8 +265,7 @@ public class LocalTest {
         int expResult = 0;
         int result = instance.getLocataireV();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
 
@@ -277,7 +274,6 @@ public class LocalTest {
      */
     @Test
     public void testInsererLocal() {
- //"INSERT INTO locaux  ('"+this.etageNporteV+"','" +this.prixV+"','" +this.surfaceV+"','"+this.descriptionV+"',"+this.FiV+")";
         System.out.println("insererLocal");
         Local instance = new Local();
         
@@ -299,7 +295,6 @@ public class LocalTest {
      */
     @Test
     public void testRechercherLocal() {
-//" SELECT idLocal FROM locaux  WHERE etageNumPorte = '"+this.etageNporteV+"' AND prix = "+this.prixV+" AND surface = "+this.surfaceV+" AND  nombrePieces = "+this.FiV+" AND description = '"+this.descriptionV+"'";     
         System.out.println("rechercherLocal");
         
         Local instance = new Local();
