@@ -110,7 +110,7 @@ public class Locataire {
       int i=-1;
     try{
             String query;
-            query= " SELECT idLocataire FROM locataire  WHERE nomPrenom = '"+this.nomV+"'";
+            query= " SELECT id FROM locataire  WHERE nom = '"+this.nomV+"'";
             ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
              ResultSet rs= ConxionBDD.stmt.executeQuery(query);
             while(rs.next()) i=rs.getInt(1);
