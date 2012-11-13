@@ -17,32 +17,59 @@ import java.util.logging.Logger;
  *
  * @author user
  */
+/**
+ *Cette classe permet de créer un objet LOCATION. Elle contient en plus des getters et des stters:
+ *Deux constructeurs,
+ *Une méthode d'initialisation,
+ *Et une méthode de mise à jour dans la BDD.
+ **/
 public class Location {
     private Locataire locataire;
     private Local local;
-
+/**
+    * 
+    * Le constructeur de la classe qui permet de créer une instance de la classe en précisant tout ses paramètres.
+    * 
+    */
      public Location(Locataire locataire,Local local){
      this.locataire=locataire;
      this.local=local;
      }
+     /**
+    * Le constructeur par défaut de la classe.
+    */
      public Location(){}
-     
+     /**
+    * 
+    * Cette méthode retourne le locataire correspondant à la location
+    */
     public Locataire getLocataire() {
         return locataire;
     }
-
+/**
+ * 
+ * Cette méthode affecte le paramètre en entrée (locataire) au champs (locataire) de l'instance de la classe
+ */
     public void setLocataire(Locataire locataire) {
         this.locataire = locataire;
     }
-
+/**
+    * 
+    * Cette méthode retourne le local correspondant à la location 
+    */
     public Local getLocal() {
         return local;
     }
-
+/**
+ * 
+ * Cette méthode affecte le paramètre en entrée (local) au champs (local) de l'instance de la classe
+ */
     public void setLocal(Local local) {
         this.local = local;
     }
-    
+    /**
+     * Cette méthode permet d'initialiser la location avec les coordonnées du local et l'id du locataire correspondant à l'id du local choisi.
+     */
     public void initialiserLocation(){
         ResultSet rs;
         String query =" SELECT locaux.etageNumPorte, locaux.surface,locaux.versement,locaux.prix,locaux.dateDebut,locaux.duree,locaux.description,locataire.nom FROM locaux LEFT JOIN locataire on locaux.locataire=locataire.id WHERE locaux.id = "+local.getIdLocal();
@@ -63,7 +90,9 @@ public class Location {
         } catch (SQLException ex) {
             Logger.getLogger(AjouterLocation.class.getName()).log(Level.SEVERE, null, ex);
         }}
-    
+    /**
+     * Cette méthode permet de mettre à jour le local 
+     */
     public void miseAJourLocal(){
     String query = "UPDATE locaux SET locataire = "+local.getLocataireV()+" ,versement = '"+local.getVersementV()+"' , dateDebut = "+local.getDateDebutV()+" ,prix='"+local.getPrixV()+"' duree = '"+local.getDureeV()+"', description ='"+local.getDescriptionV()+"' WHERE id = "+local.getIdLocal() ;
             try {
