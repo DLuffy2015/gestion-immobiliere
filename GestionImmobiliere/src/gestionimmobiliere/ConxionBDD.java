@@ -28,7 +28,7 @@ public class ConxionBDD {
 
 
 public static void connect() {
-   String url = "jdbc:mysql://localhost:3306/agence_immobiliere ";
+   String url = "jdbc:mysql://localhost:3306/agence_immobiliere";
 
     try {
             // establish connection to database   url , user , password

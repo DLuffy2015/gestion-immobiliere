@@ -3,7 +3,6 @@
  * and open the template in the editor.
  */
 package gestionimmobiliere;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -37,12 +36,12 @@ public class Locataire {
     téléphoneV=telephone;
     adresseV=adresse;
     }
-    /**
+     /**
     * Le constructeur par défaut de la classe.
     */
     public Locataire(){};
     
-    /**
+   /**
     * 
     * Cette méthode retourne le nom du locataire
     */

@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 public class LocalTest {
     Local instance;
     public LocalTest() {
-   instance =new Local(3,"2emme etage N°3","120M²",5,"45milles dinars","prix négociable","2012/11/10","5 mois ","1000dinars",4);
+    instance =new Local(3,"2emme etage N°3","120M²",5,"45milles dinars","prix négociable","2012/11/10","5 mois ","1000dinars",4);
    
     }
     
@@ -61,12 +61,11 @@ public class LocalTest {
     public void testSetIdLocal() {
         System.out.println("setIdLocal");
         int expResult = 4;
-        Local instance = new Local();
         instance.setIdLocal(expResult);
         int result = instance.getIdLocal();
         assertEquals(expResult, result);
     }
- 
+   
     /**
      * Test of getEtageNporteV method, of class Local.
      */
@@ -139,9 +138,9 @@ public class LocalTest {
     public void testSetFiV() {
         System.out.println("setFiV");
         int FiV = 4;
-        Local instance = new Local();
         instance.setFiV(FiV);
-        
+        int result = instance.getFiV();
+        assertEquals(FiV, result);
     }
 
     /**
@@ -163,7 +162,8 @@ public class LocalTest {
         System.out.println("setPrixV");
         String prixV = "44milles dinars";
          instance.setPrixV(prixV);
-        
+        String result = instance.getPrixV();
+         assertEquals(prixV, result);
     }
 
     /**
@@ -172,15 +172,13 @@ public class LocalTest {
     @Test
     public void testGetDescriptionV() {
         System.out.println("getDescriptionV");
-        Local instance = new Local();
         String expResult = "prix négociable";
         String result = instance.getDescriptionV();
         assertEquals(expResult, result);
        
     }
    
-        
-  
+ 
     /**
      * Test of setDescriptionV method, of class Local.
      */
@@ -188,8 +186,9 @@ public class LocalTest {
     public void testSetDescriptionV() {
         System.out.println("setDescriptionV");
         String descriptionV = "belle appartement ";
-        Local instance = new Local();
         instance.setDescriptionV(descriptionV);
+        String result = instance.getDescriptionV();
+        assertEquals(descriptionV, result);
        
     }
    /**
@@ -198,23 +197,22 @@ public class LocalTest {
     @Test
     public void testGetDateDebutV() {
         System.out.println("getDateDebutV");
-        Local instance = new Local();
-        String expResult = "2012/11/10";
+        String expResult = "2012-11-10";
         String result = instance.getDateDebutV();
         assertEquals(expResult, result);
        
     }
-
+    
+  
     /**
      * Test of setDateDebutV method, of class Local.
      */
     @Test
     public void testSetDateDebutV() {
         System.out.println("setDateDebutV");
-        String dateDebutV = "2012/11/13";
+        String dateDebutV = "2012-11-13";
         Local instance = new Local();
         instance.setDateDebutV(dateDebutV);
-       
     }
 
     /**
@@ -223,11 +221,9 @@ public class LocalTest {
     @Test
     public void testGetDureeV() {
         System.out.println("getDureeV");
-        Local instance = new Local();
         String expResult = "5 mois";
         String result = instance.getDureeV();
         assertEquals(expResult, result);
-       
     }
 
     /**
@@ -237,11 +233,11 @@ public class LocalTest {
     public void testSetDureeV() {
         System.out.println("setDureeV");
         String dureeV = "2 mois";
-        Local instance = new Local();
         instance.setDureeV(dureeV);
-       
+       String result = instance.getDureeV();
+        assertEquals(dureeV, result);
     }
- 
+
     /**
      * Test of setVersementV method, of class Local.
      */
@@ -249,9 +245,9 @@ public class LocalTest {
     public void testSetVersementV() {
         System.out.println("setVersementV");
         String versementV = "50 Milles dinars";
-        Local instance = new Local();
         instance.setVersementV("50 Milles dinars");
-        assertEquals(versementV, instance.getVersementV());
+        String result =instance.getVersementV();
+        assertEquals(versementV, result);
     }
 
     /**
@@ -260,14 +256,12 @@ public class LocalTest {
     @Test
     public void testGetLocataireV() {
         System.out.println("getLocataireV");
-        Local instance = new Local();
-        
-        int expResult = 0;
+        int expResult = 4;
         int result = instance.getLocataireV();
         assertEquals(expResult, result);
         
     }
-
+    
 
     /**
      * Test of insererLocal method, of class Local.
@@ -275,17 +269,10 @@ public class LocalTest {
     @Test
     public void testInsererLocal() {
         System.out.println("insererLocal");
-        Local instance = new Local();
-        
-        instance.setSurfaceV("80 M²");   
-        instance.setEtageNporteV("2emme Etage N°5");
-        instance.setPrixV("25milles dinars");
-        instance.setFiV(4);
-        instance.setDescriptionV("Une belle appartement meublé");
-        
-        instance.insererLocal();
+        Local instancet = new Local(3,"2emme Etage N°5","80 M²",4,"25milles dinars","Une belle appartement meublé","2012-11-10","5 mois ","1000dinars",4);
+        instancet.insererLocal();
         int expResult = -1;
-        int result = instance.rechercherLocal();
+        int result = instancet.rechercherLocal();
         assertEquals(expResult, result);//la difference 
         
     }
@@ -296,16 +283,9 @@ public class LocalTest {
     @Test
     public void testRechercherLocal() {
         System.out.println("rechercherLocal");
-        
-        Local instance = new Local();
-       
-        instance.setSurfaceV("100 M²");   
-        instance.setEtageNporteV("6emme Etage N°12");
-        instance.setPrixV("33milles dinars");
-        instance.setFiV(5);
-        instance.setDescriptionV("Une belle appartement meublé");
+        Local instancet = new Local(3,"6emme Etage N°12","100 M²",5,"33milles dinars","Une belle appartement meublé","2012-11-10","5 mois ","1000dinars",4);
         int expResult = 1;
-        int result = instance.rechercherLocal();
+        int result = instancet.rechercherLocal();
         assertEquals(expResult, result);
           }
 }

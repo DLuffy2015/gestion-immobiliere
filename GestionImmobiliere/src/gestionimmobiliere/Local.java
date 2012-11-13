@@ -1,8 +1,9 @@
-/*
+/*2
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package gestionimmobiliere;
+
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +13,7 @@ import java.util.logging.Logger;
 
 /**
  *
- *@author imane
+ * @author user
  */
 /**
  *Cette classe permet de créer un objet LOCAL. Elle contient en plus des getters et des stters:
@@ -20,8 +21,6 @@ import java.util.logging.Logger;
  *Une méthode d'insertion dans la BDD,
  *Et une méthode de recherche dans la BDD.
  **/
- 
-
 public class Local {
    private int idLocal;
    private String etageNporteV;
@@ -50,18 +49,19 @@ public class Local {
    this.dureeV=dureeV;
    this.versementV=versementV;
    this.locataireV=locataireV;}
-   /**
+ /**
     * Le constructeur par défaut de la classe.
     */
-   public Local(){};
-   /**
+    Local() {}
+   
+    /**
     * 
     * Cette méthode retourne l'id du local 
     */
-    public int getIdLocal() {
+     public int getIdLocal() {
         return idLocal;
     }
-/**
+    /**
  * 
  * Cette méthode affecte le paramètre en entrée (idLocal) au champs (idLocal) de l'instance de la classe
  */
@@ -196,10 +196,10 @@ public class Local {
         this.locataireV = locataireV;
     }
 
-   /**
+   
+    /**
     * Cette méthode permet d'insérer un local dans la BDD.
     */
-   
    public void insererLocal()
    {
    String query="INSERT INTO locaux (etageNumPorte, prix, surface, description, nombrePieces ) VALUES ('"+this.etageNporteV+"','" +this.prixV+"','" +this.surfaceV+"','"+this.descriptionV+"',"+this.FiV+")";
@@ -229,7 +229,7 @@ ResultSet rs= ConxionBDD.stmt.executeQuery(query);
 while(rs.next()) i=rs.getInt(1);
 
   }catch ( SQLException sqlException )
-    {  sqlException.printStackTrace(); }
+    {}
 return i;
 }
 
