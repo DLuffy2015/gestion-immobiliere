@@ -146,7 +146,7 @@ public class LocataireTest {
     @Test
     public void testInsererLocataire() {
         System.out.println("insererLocataire");
-        Locataire instance = new Locataire("meddahi imane","ai_meddahi@esi.dz","portable:05553669877","Dar el beida");
+        Locataire instance = new Locataire("meddahi imane","ai_meddahi@esi.dz","0553669877","Dar el beida");
         instance.insererLocataire();
         int expResult = -1;//id du locataire 
         int result = instance.rechercherLocataire();

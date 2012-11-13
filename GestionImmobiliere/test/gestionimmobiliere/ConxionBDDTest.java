@@ -46,8 +46,7 @@ public class ConxionBDDTest {
         Statement expResult = null;
         Statement result = ConxionBDD.getStmt();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
@@ -57,8 +56,7 @@ public class ConxionBDDTest {
     public void testConnect() {
         System.out.println("connect");
         ConxionBDD.connect();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -68,7 +66,6 @@ public class ConxionBDDTest {
     public void testClose() {
         System.out.println("close");
         ConxionBDD.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 }
