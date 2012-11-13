@@ -31,15 +31,17 @@ public class Location {
     * Le constructeur de la classe qui permet de créer une instance de la classe en précisant tout ses paramètres.
     * 
     */
+
      public Location(Locataire locataire,Local local){
      this.locataire=locataire;
      this.local=local;
      }
-     /**
+      /**
     * Le constructeur par défaut de la classe.
     */
+
      public Location(){}
-     /**
+ /**
     * 
     * Cette méthode retourne le locataire correspondant à la location
     */
@@ -50,6 +52,7 @@ public class Location {
  * 
  * Cette méthode affecte le paramètre en entrée (locataire) au champs (locataire) de l'instance de la classe
  */
+
     public void setLocataire(Locataire locataire) {
         this.locataire = locataire;
     }
@@ -67,7 +70,9 @@ public class Location {
     public void setLocal(Local local) {
         this.local = local;
     }
-    /**
+     
+     
+ /**
      * Cette méthode permet d'initialiser la location avec les coordonnées du local et l'id du locataire correspondant à l'id du local choisi.
      */
     public void initialiserLocation(){

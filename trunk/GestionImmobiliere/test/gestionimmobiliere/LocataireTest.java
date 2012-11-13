@@ -16,8 +16,9 @@ import static org.junit.Assert.*;
  * @author user
  */
 public class LocataireTest {
-    
+    Locataire instance;
     public LocataireTest() {
+     instance= new Locataire("asma","asma28@hotmail.fr","0556789567","cité mohammadia Bt 23 Num 89");   
     }
     
     @BeforeClass
@@ -44,8 +45,7 @@ public class LocataireTest {
     @Test
     public void testGetNomV() {
         System.out.println("getNomV");
-        Locataire instance = new Locataire();
-        String expResult = "";
+        String expResult = "asma";
         String result = instance.getNomV();
         assertEquals(expResult, result);
         
@@ -57,9 +57,10 @@ public class LocataireTest {
     @Test
     public void testSetNomV() {
         System.out.println("setNomV");
-        String nomV = "";
-        Locataire instance = new Locataire();
+        String nomV = "lina";
         instance.setNomV(nomV);
+        String result=instance.getNomV();
+        assertEquals(nomV, result);
        
     }
 
@@ -69,8 +70,7 @@ public class LocataireTest {
     @Test
     public void testGetMailV() {
         System.out.println("getMailV");
-        Locataire instance = new Locataire();
-        String expResult = "";
+        String expResult = "asma28@hotmail.fr";
         String result = instance.getMailV();
         assertEquals(expResult, result);
        
@@ -82,9 +82,10 @@ public class LocataireTest {
     @Test
     public void testSetMailV() {
         System.out.println("setMailV");
-        String mailV = "";
-        Locataire instance = new Locataire();
+        String mailV = "linaGH@esi.dz";
         instance.setMailV(mailV);
+        String result= instance.getMailV();
+        assertEquals(mailV,result);
       
     }
 
@@ -93,9 +94,8 @@ public class LocataireTest {
      */
     @Test
     public void testGetTéléphoneV() {
-        System.out.println("getT\u00e9l\u00e9phoneV");
-        Locataire instance = new Locataire();
-        String expResult = "";
+        System.out.println("getTelephoneV");
+        String expResult = "0556789567";
         String result = instance.getTéléphoneV();
         assertEquals(expResult, result);
         
@@ -107,9 +107,10 @@ public class LocataireTest {
     @Test
     public void testSetTéléphoneV() {
         System.out.println("setTphoneV");
-        String téléphoneV = "";
-        Locataire instance = new Locataire();
+        String téléphoneV = "0555555555";
         instance.setTéléphoneV(téléphoneV);
+        String result=instance.getTéléphoneV();
+        assertEquals(téléphoneV,result);
        
     }
 
@@ -119,8 +120,7 @@ public class LocataireTest {
     @Test
     public void testGetAdresseV() {
         System.out.println("getAdresseV");
-        Locataire instance = new Locataire();
-        String expResult = "";
+        String expResult = "cité mohammadia Bt 23 Num 89";
         String result = instance.getAdresseV();
         assertEquals(expResult, result);
        
@@ -132,9 +132,10 @@ public class LocataireTest {
     @Test
     public void testSetAdresseV() {
         System.out.println("setAdresseV");
-        String adresseV = "";
-        Locataire instance = new Locataire();
+        String adresseV = "cité Bab El Oued Num 119";
         instance.setAdresseV(adresseV);
+        String result=instance.getAdresseV();
+        assertEquals(adresseV, result);
         
     }
 
@@ -149,6 +150,7 @@ public class LocataireTest {
         instance.insererLocataire();
         int expResult = -1;//id du locataire 
         int result = instance.rechercherLocataire();
+        assertTrue(result!=expResult);
         //assertEquals(expResult, result); comment verifier != -1
     }
 
