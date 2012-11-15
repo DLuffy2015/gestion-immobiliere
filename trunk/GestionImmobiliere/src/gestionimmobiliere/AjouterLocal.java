@@ -1,8 +1,3 @@
-/*  1  
- * 
- *
- * 
- */
 package gestionimmobiliere;
 
 
@@ -13,22 +8,22 @@ package gestionimmobiliere;
  */
 /**
  *
- * Cette classe permet de créer la fenêtre dans laquelle 
- * on doit saisir les coordonnées d'un nouveau local à enregistrer.
- * Elle contient un constructeur et une méthode de recherche.
+ * Cette classe permet de créer une fenêtre d'ajout de local.
+ * L'utilisateur doit y saisir les coordonnées d'un nouveau local à enregistrer.
+ * Elle contient un constructeur.
  */
 public class AjouterLocal extends javax.swing.JFrame {
 
     /**
-     * C'est le constructeur de la classe
+     * C'est le constructeur de la classe.
      */
     public AjouterLocal() {
         initComponents();
     }
 
     /**
-     * This method is called from within the constructor to initialize the form.
-     * 
+     * Cette méthode est appellée dans le constructeur pour initialiser la fenêtre.
+     * Attention: Ne pas modifier son code!
      * 
      */
     @SuppressWarnings("unchecked")
@@ -212,8 +207,6 @@ public class AjouterLocal extends javax.swing.JFrame {
 
     private void surfaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surfaceActionPerformed
      local.setSurfaceV(surface.getText());
-       
-        
     }//GEN-LAST:event_surfaceActionPerformed
 
     private void adresseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adresseActionPerformed
