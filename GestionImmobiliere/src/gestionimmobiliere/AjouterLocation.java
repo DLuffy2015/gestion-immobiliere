@@ -21,6 +21,7 @@ public class AjouterLocation extends javax.swing.JFrame {
 
     public AjouterLocation(int idLocal) {
              initComponents();
+             this.setLocationRelativeTo(null);
              location.getLocal().setIdLocal(idLocal);
              location.initialiserLocation();
               
@@ -66,7 +67,8 @@ public class AjouterLocation extends javax.swing.JFrame {
         msgErreur = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Ajouter location");
 
         jLabel1.setText("Locataire *:");
 

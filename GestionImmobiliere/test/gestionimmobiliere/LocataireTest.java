@@ -173,4 +173,18 @@ public class LocataireTest {
          assertEquals(expResult, result);
         
     }
+    
+    /**
+     * Test of supprimerLocataire method, of class Locataire.
+     */
+    @Test
+    public void supprimerLocataire() {
+        System.out.println("supprimerLocataire");
+        Locataire instance = new Locataire();
+        instance.supprimerLocataire(2);
+        int expResult = -1;//id du locataire
+        int result = instance.rechercherLocataire();
+        assertEquals(expResult, result);
+           
+    }
 }

@@ -31,6 +31,7 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         initTabLocaux( " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,agence_immobiliere.locataire.nom FROM locaux LEFT JOIN locataire on agence_immobiliere.locaux.locataire=agence_immobiliere.locataire.id WHERE 1");
         initTabLocataires();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -71,7 +72,7 @@ public class Principal extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         AjoutLocation.setText("Modifier la location");
         AjoutLocation.addActionListener(new java.awt.event.ActionListener() {
@@ -97,7 +98,8 @@ public class Principal extends javax.swing.JFrame {
         });
         menuTabLocataires.add(SuppLocataire);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Acceuil");
 
         AjouLocal.setText("Ajouter un local");
         AjouLocal.addActionListener(new java.awt.event.ActionListener() {
@@ -326,11 +328,17 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(32, 32, 32))
         );
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        jMenu1.setText("Menu");
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        jMenuItem1.setText("Quitter");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -455,11 +463,18 @@ detailRech=detailRecherche.getText();
                 rsLocataires.absolute(det+1);
                 locataireASupprimer.supprimerLocataire(rsLocataires.getInt(1));
                 ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
-                initTabLocataires();}
+                initTabLocataires();
+                ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
+                initTabLocaux( " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,agence_immobiliere.locataire.nom FROM locaux LEFT JOIN locataire on agence_immobiliere.locaux.locataire=agence_immobiliere.locataire.id WHERE 1");
+              }
         } catch (SQLException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_SuppLocataireActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -616,8 +631,8 @@ query ="SELECT id, nom, telephone, mail, adresse FROM locataire WHERE 1";
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
