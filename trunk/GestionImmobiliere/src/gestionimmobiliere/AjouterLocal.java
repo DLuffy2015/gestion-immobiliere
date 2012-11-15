@@ -19,6 +19,7 @@ public class AjouterLocal extends javax.swing.JFrame {
      */
     public AjouterLocal() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -51,7 +52,8 @@ public class AjouterLocal extends javax.swing.JFrame {
 
         jLabel6.setText("jLabel6");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Ajouter local");
 
         Annuler.setText("Annuler");
         Annuler.addActionListener(new java.awt.event.ActionListener() {

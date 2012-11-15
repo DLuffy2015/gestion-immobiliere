@@ -18,6 +18,7 @@ public class AjouterLocataire extends javax.swing.JFrame {
      */
     public AjouterLocataire() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
     
 
@@ -44,7 +45,8 @@ public class AjouterLocataire extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         adresse = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Ajouter locataire");
 
         valider.setText("Valider");
         valider.addActionListener(new java.awt.event.ActionListener() {

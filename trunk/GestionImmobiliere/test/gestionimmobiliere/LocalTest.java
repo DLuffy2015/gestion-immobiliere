@@ -288,4 +288,17 @@ public class LocalTest {
         int result = instancet.rechercherLocal();
         assertEquals(expResult, result);
           }
+    
+    /**
+     * Test of supprimerLocal method, of class Local.
+     */
+    @Test
+    public void supprimerLocal() {
+        System.out.println("supprimerLocal");
+        Local instancet = new Local(5,"2emme Etage N°5","80 M²",4,"25milles dinars","Une belle appartement meublé","","","",2);
+        int expResult = -1;
+        instance.supprimerLocal();
+        int result = instancet.rechercherLocal();
+        assertEquals(expResult, result);
+          }
 }
