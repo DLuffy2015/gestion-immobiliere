@@ -185,22 +185,30 @@ public class AjouterLocataire extends javax.swing.JFrame {
     }//GEN-LAST:event_téléphoneActionPerformed
 
     private void annulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerActionPerformed
-this.dispose();
+       this.dispose();
     }//GEN-LAST:event_annulerActionPerformed
 
     private void validerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerActionPerformed
-    if(!(locataire.getNomV()).equals("")){
-         if(locataire.rechercherLocataire() !=-1)
-                    {jLabel4.setText("Ce locataire est déjà enregistré");}
-         else{locataire.insererLocataire();
-          Principal.initTabLocataires();
-          this.dispose();
-         }}
-    else jLabel4.setText("Le champs avec * est obligatoire!");
+       
+        if(!(locataire.getNomV()).equals(""))
+        {
+           if(locataire.rechercherLocataire() !=-1)
+           {
+              jLabel4.setText("Ce locataire est déjà enregistré");
+           }
+           else
+           {
+              locataire.insererLocataire();
+              Principal.initTabLocataires();
+              this.dispose();
+           }
+        }
+        else 
+           jLabel4.setText("Le champs avec * est obligatoire!");
     }//GEN-LAST:event_validerActionPerformed
 
     private void adresseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adresseActionPerformed
-locataire.setAdresseV(adresse.getText());       
+       locataire.setAdresseV(adresse.getText());       
     }//GEN-LAST:event_adresseActionPerformed
 
     private Locataire locataire=new Locataire();

@@ -29,13 +29,7 @@ public class ConxionBDDTest {
     public static void tearDownClass() {
     }
     
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
+  
 
     /**
      * Test of getStmt method, of class ConxionBDD.
@@ -45,27 +39,9 @@ public class ConxionBDDTest {
         System.out.println("getStmt");
         Statement expResult = null;
         Statement result = ConxionBDD.getStmt();
-        assertEquals(expResult, result);
+        assertTrue(expResult!=result);
        
     }
 
-    /**
-     * Test of connect method, of class ConxionBDD.
-     */
-    @Test
-    public void testConnect() {
-        System.out.println("connect");
-        ConxionBDD.connect();
-        
-    }
-
-    /**
-     * Test of close method, of class ConxionBDD.
-     */
-    @Test
-    public void testClose() {
-        System.out.println("close");
-        ConxionBDD.close();
-        
-    }
+   
 }

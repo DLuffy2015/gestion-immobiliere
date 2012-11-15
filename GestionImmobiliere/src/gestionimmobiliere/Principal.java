@@ -67,6 +67,7 @@ public class Principal extends javax.swing.JFrame {
         critereRechercher = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         detailRecherche = new javax.swing.JTextField();
+        msgErreur = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -219,14 +220,15 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        msgErreur.setText(" ");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lancerRecherche, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -234,7 +236,11 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(detailRecherche, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(detailRecherche, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(msgErreur, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lancerRecherche, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -247,7 +253,9 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(detailRecherche, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lancerRecherche))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lancerRecherche)
+                    .addComponent(msgErreur)))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -378,7 +386,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void critereRechercherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_critereRechercherActionPerformed
         critereRech=critereRechercher.getSelectedIndex();
-        if(critereRech==0) {
+        if(critereRech==0 ||critereRech==3 ||critereRech==4 ) {
             detailRecherche.setEnabled(false);
         }
         else {
@@ -391,21 +399,30 @@ detailRech=detailRecherche.getText();
     }//GEN-LAST:event_detailRechercheActionPerformed
 
     private void lancerRechercheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lancerRechercheActionPerformed
-        
+        int indice=0;
+         int nbPiece=0;
         if(critereRech!=0){
     switch (critereRech)
        {
            case 1: 
-           {initTabLocaux( " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,locataire.nom FROM locaux LEFT JOIN locataire on locaux.locataire=locataire.id WHERE locaux.prix = '"+detailRech+"'");
+           {
+               initTabLocaux( "SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,agence_immobiliere.locataire.nom FROM locaux LEFT JOIN locataire ON agence_immobiliere.locaux.locataire=agence_immobiliere.locataire.id WHERE locaux.prix = '"+detailRech+"'");
            }break;
            case 2:
-           {initTabLocaux( " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,locataire.nom FROM locaux LEFT JOIN locataire on locaux.locataire=locataire.id WHERE locaux.nombrePieces = "+detailRech);
+           { try{
+                nbPiece=Integer.parseInt(detailRech);
+               }catch(NumberFormatException e){
+             msgErreur.setText("La valeur saisie doit etre un entier");
+             indice=1; }
+             if(indice==0)  initTabLocaux( "SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,agence_immobiliere.locataire.nom FROM locaux LEFT JOIN locataire ON agence_immobiliere.locaux.locataire=agence_immobiliere.locataire.id WHERE locaux.nombrePieces = "+nbPiece);
            }break;
            case 3:
-           {initTabLocaux( " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,locataire.nom FROM locaux LEFT JOIN locataire on locaux.locataire=locataire.id WHERE locaux.locataire = null");
+           {initTabLocaux( "SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,agence_immobiliere.locataire.nom FROM locaux LEFT JOIN locataire ON agence_immobiliere.locaux.locataire=agence_immobiliere.locataire.id WHERE locaux.locataire = NULL");
+                
            }break;
            case 4:
-           {initTabLocaux( " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,locataire.nom FROM locaux LEFT JOIN locataire on locaux.locataire=locataire.id WHERE locaux.locataire != null");
+           {
+               initTabLocaux( "SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,agence_immobiliere.locataire.nom FROM locaux LEFT JOIN locataire ON agence_immobiliere.locaux.locataire=agence_immobiliere.locataire.id WHERE locaux.locataire <> NULL");
            }break;
         }    }
             
@@ -418,17 +435,19 @@ detailRech=detailRecherche.getText();
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void AjoutLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AjoutLocationActionPerformed
-        try {
-            int det=jTable1.getSelectedRow() ;
-                  boolean rsVide=rsLocaux.first();
-                 if(rsVide){
-                   rsLocaux.absolute(det+1);
-                   AjouterLocation location=new AjouterLocation( rsLocaux.getInt(1));
-                   location.setVisible(true);
-                 }
-        } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       try {
+             int det=jTable1.getSelectedRow() ;
+             boolean rsVide=rsLocaux.first();
+             if(rsVide)
+             {
+               rsLocaux.absolute(det+1);
+               AjouterLocation location=new AjouterLocation( rsLocaux.getInt(1));
+               location.setVisible(true);
+             }
+           } catch (SQLException ex) 
+                   {
+                     Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                   }
         
     }//GEN-LAST:event_AjoutLocationActionPerformed
 
@@ -436,30 +455,33 @@ detailRech=detailRecherche.getText();
      try {
             int det=jTable1.getSelectedRow() ;
                   boolean rsVide=rsLocaux.first();
-                 if(rsVide){
-                   rsLocaux.absolute(det+1);
+                  if(rsVide){
+                  rsLocaux.absolute(det+1);
                   localASupprimer.setIdLocal(rsLocaux.getInt(1));
                   localASupprimer.supprimerLocal();
                   ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
                   initTabLocaux( " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,agence_immobiliere.locataire.nom FROM locaux LEFT JOIN locataire on agence_immobiliere.locaux.locataire=agence_immobiliere.locataire.id WHERE 1");
                  }
-        } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch (SQLException ex) 
+                {
+                  Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                }
         
     }//GEN-LAST:event_SuppLocationActionPerformed
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
-        if((evt.getButton()==3)&&(jTable2.getSelectedRowCount()==1)){
+        if((evt.getButton()==3)&&(jTable2.getSelectedRowCount()==1))
+        {
             menuTabLocataires.show(jTable2,evt.getX(),evt.getY());
         }
     }//GEN-LAST:event_jTable2MouseClicked
 
     private void SuppLocataireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuppLocataireActionPerformed
         try {
-            int det=jTable2.getSelectedRow() ;
+               int det=jTable2.getSelectedRow() ;
                boolean rsVide=rsLocataires.first();
-              if(rsVide){
+               if(rsVide)
+               {
                 rsLocataires.absolute(det+1);
                 locataireASupprimer.supprimerLocataire(rsLocataires.getInt(1));
                 ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
@@ -467,9 +489,10 @@ detailRech=detailRecherche.getText();
                 ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
                 initTabLocaux( " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,agence_immobiliere.locataire.nom FROM locaux LEFT JOIN locataire on agence_immobiliere.locaux.locataire=agence_immobiliere.locataire.id WHERE 1");
               }
-        } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            } catch (SQLException ex) 
+                     {
+                       Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                     }
     }//GEN-LAST:event_SuppLocataireActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -552,28 +575,35 @@ query ="SELECT id, nom, telephone, mail, adresse FROM locataire WHERE 1";
         try {
               ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
               rsLocataires = ConxionBDD.stmt.executeQuery(query);
-        } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            } catch (SQLException ex) 
+                    {
+                      Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
        
         
         int row=0;
- while(jTable2.getRowCount()!=0){  model1.removeRow(0); } 
+        while(jTable2.getRowCount()!=0)
+        {  
+            model1.removeRow(0);
+        } 
         try {
-            while(rsLocataires.next()){
+            while(rsLocataires.next())
+             {
 
-            if(row>=jTable2.getRowCount())
-            {
-            model1.insertRow(jTable2.getRowCount(),new Object[]{"","","",""});}
-            jTable2.setValueAt(rsLocataires.getString(2),row,0);
-            jTable2.setValueAt(rsLocataires.getString(4),row,1);
-            jTable2.setValueAt(rsLocataires.getString(3),row,2);
-            jTable2.setValueAt(rsLocataires.getString(5),row,3); 
-            row++;
+              if(row>=jTable2.getRowCount())
+              {
+                model1.insertRow(jTable2.getRowCount(),new Object[]{"","","",""});
+              }
+              jTable2.setValueAt(rsLocataires.getString(2),row,0);
+              jTable2.setValueAt(rsLocataires.getString(4),row,1);
+              jTable2.setValueAt(rsLocataires.getString(3),row,2);
+              jTable2.setValueAt(rsLocataires.getString(5),row,3); 
+              row++;
             }       
-        } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+           } catch (SQLException ex) 
+                   {
+                      Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                   }
     }   
     
     
@@ -645,5 +675,6 @@ query ="SELECT id, nom, telephone, mail, adresse FROM locataire WHERE 1";
     private javax.swing.JButton lancerRecherche;
     private javax.swing.JPopupMenu menuTabLocataires;
     private javax.swing.JPopupMenu menuTabLocaux;
+    private javax.swing.JLabel msgErreur;
     // End of variables declaration//GEN-END:variables
 }

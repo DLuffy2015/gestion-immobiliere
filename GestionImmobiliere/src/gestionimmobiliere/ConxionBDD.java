@@ -14,9 +14,10 @@ import javax.swing.*;
 public class ConxionBDD {
 
 
-      public static Connection connection = null; // manages connection
-      public static Statement stmt = null; // query statement
+    public static Connection connection = null; // manages connection
+    public static Statement stmt = null; // query statement
 
+    
     public static Statement getStmt() {
         return stmt;
     }
@@ -77,8 +78,6 @@ public static void connect() {
  */
     public static void close() {
         try {
-            //statement = connect.createStatement();
-            //statement.executeQuery("SHUTDOWN");
             connection.close();
             stmt.close();
         }

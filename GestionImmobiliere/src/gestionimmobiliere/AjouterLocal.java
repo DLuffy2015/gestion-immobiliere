@@ -208,7 +208,7 @@ public class AjouterLocal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void surfaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surfaceActionPerformed
-     local.setSurfaceV(surface.getText());
+        local.setSurfaceV(surface.getText());
     }//GEN-LAST:event_surfaceActionPerformed
 
     private void adresseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adresseActionPerformed
@@ -221,21 +221,26 @@ public class AjouterLocal extends javax.swing.JFrame {
     }//GEN-LAST:event_prixActionPerformed
 
     private void FiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FiActionPerformed
-    local.setFiV(Fi.getSelectedIndex());
+        local.setFiV(Fi.getSelectedIndex()+3);
     }//GEN-LAST:event_FiActionPerformed
 
     private void ValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValiderActionPerformed
        local.setDescriptionV(description.getText());
        
-       if(!(local.getEtageNporteV()).equals("")){
+       if(!(local.getEtageNporteV()).equals(""))
+       {
            
-           if(local.rechercherLocal()==-1){
-       local.insererLocal();
-       Principal.initTabLocaux( " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,locataire.nom FROM locaux LEFT JOIN locataire on locaux.locataire=locataire.id WHERE 1");
-       this.dispose();   
+           if(local.rechercherLocal()==-1)
+           {
+             local.insererLocal();
+             Principal.initTabLocaux( " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,locataire.nom FROM locaux LEFT JOIN locataire on locaux.locataire=locataire.id WHERE 1");
+             this.dispose();   
+            }
+           else
+           { 
+             jLabel8.setText(" Ce local existe déja! ");
+           }
        }
-           else{  jLabel8.setText(" Ce local existe déja! ");
-           }}
        
     }//GEN-LAST:event_ValiderActionPerformed
 
