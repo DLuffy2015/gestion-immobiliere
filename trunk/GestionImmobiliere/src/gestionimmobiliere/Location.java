@@ -23,10 +23,10 @@ import java.util.logging.Logger;
  *Une méthode d'initialisation,
  *Et une méthode de mise à jour dans la BDD.
  **/
-public class Location {
+ public class Location {
     private Locataire locataire;
     private Local local;
-/**
+   /**
     * 
     * Le constructeur de la classe qui permet de créer une instance de la classe en précisant tout ses paramètres.
     * 
@@ -36,43 +36,45 @@ public class Location {
      this.locataire=locataire;
      this.local=local;
      }
-      /**
+   /**
     * Le constructeur par défaut de la classe.
     */
 
-     public Location(){}
- /**
+     public Location(){
+     locataire=new Locataire();
+     local=new Local();}
+   /**
     * 
     * Cette méthode retourne le locataire correspondant à la location
     */
     public Locataire getLocataire() {
         return locataire;
     }
-/**
- * 
- * Cette méthode affecte le paramètre en entrée (locataire) au champs (locataire) de l'instance de la classe
- */
+   /**
+    * 
+    * Cette méthode affecte le paramètre en entrée (locataire) au champs (locataire) de l'instance de la classe
+    */
 
     public void setLocataire(Locataire locataire) {
         this.locataire = locataire;
     }
-/**
+   /**
     * 
     * Cette méthode retourne le local correspondant à la location 
     */
     public Local getLocal() {
         return local;
     }
-/**
- * 
- * Cette méthode affecte le paramètre en entrée (local) au champs (local) de l'instance de la classe
- */
+   /**
+    * 
+    * Cette méthode affecte le paramètre en entrée (local) au champs (local) de l'instance de la classe
+    */
     public void setLocal(Local local) {
         this.local = local;
     }
      
      
- /**
+    /**
      * Cette méthode permet d'initialiser la location avec les coordonnées du local et l'id du locataire correspondant à l'id du local choisi.
      */
     public void initialiserLocation(){
@@ -91,32 +93,38 @@ public class Location {
              local.setPrixV(rs.getString(4));
              local.setDureeV(rs.getString(6));
              local.setDescriptionV(rs.getString(7));
-                     }
-        } catch (SQLException ex) {
-            Logger.getLogger(AjouterLocation.class.getName()).log(Level.SEVERE, null, ex);
-        }}
+                             }
+            } catch (SQLException ex) 
+                    {
+                      Logger.getLogger(AjouterLocation.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+    }
     /**
      * Cette méthode permet de mettre à jour le local 
      */
     public void miseAJourLocal(){
-    String query = "UPDATE locaux SET locataire = "+local.getLocataireV()+" , versement = '"+local.getVersementV()+"' , dateDebut = "+local.getDateDebutV()+" , prix='"+local.getPrixV()+"', duree = '"+local.getDureeV()+"', description ='"+local.getDescriptionV()+"' WHERE id = "+local.getIdLocal() ;
+       String query = "UPDATE locaux SET locataire = "+local.getLocataireV()+" , versement = '"+local.getVersementV()+"' , dateDebut = "+local.getDateDebutV()+" , prix='"+local.getPrixV()+"', duree = '"+local.getDureeV()+"', description ='"+local.getDescriptionV()+"' WHERE id = "+local.getIdLocal() ;
             try {
                 ConxionBDD.stmt.executeUpdate(query);
-            } catch (SQLException ex) {
-                Logger.getLogger(AjouterLocation.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                } catch (SQLException ex)
+                       {
+                          Logger.getLogger(AjouterLocation.class.getName()).log(Level.SEVERE, null, ex);
+                       }
     }
-
+    /**
+     * Cette méthode permet de convertir une chaine de caractères à un objet Date de java. 
+     */
+    
     public static java.util.Date convertirDate(String date) {
-     java.util.Date dateC=null;
-       
+      java.util.Date dateC=null;
       SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        try {
+      try {
             dateC= (java.util.Date) formatter.parse(date);
-        } catch (ParseException ex) {
-            Logger.getLogger(AjouterLocation.class.getName()).log(Level.SEVERE, null, ex);
-        }
+          } catch (ParseException ex)
+                  {
+                    Logger.getLogger(AjouterLocation.class.getName()).log(Level.SEVERE, null, ex);
+                  }
       return dateC;
-}
+    }
   
 }

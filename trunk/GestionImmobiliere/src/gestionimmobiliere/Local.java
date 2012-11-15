@@ -20,14 +20,14 @@ import java.util.logging.Logger;
  **/
 public class Local {
    private int idLocal;
-   private String etageNporteV;
-   private String surfaceV;
+   private String etageNporteV="";
+   private String surfaceV="";
    private int FiV;
-   private String prixV;
-   private String descriptionV;  
-   private String dateDebutV;
-   private String dureeV;
-   private String versementV;
+   private String prixV="";
+   private String descriptionV="";  
+   private String dateDebutV="";
+   private String dureeV="";
+   private String versementV="";
    private int locataireV;
 
    /**
@@ -36,16 +36,17 @@ public class Local {
     * 
     */
    public Local(int idLocal,String etageNporteV,String surfaceV,int FiV,String prixV,String descriptionV,String dateDebutV,String dureeV,String versementV,int locataireV){
-   this.idLocal=idLocal;
-   this.etageNporteV=etageNporteV;
-   this.surfaceV=surfaceV;
-   this.FiV=FiV;
-   this.prixV=prixV;
-   this.descriptionV=descriptionV;  
-   this.dateDebutV=dateDebutV;
-   this.dureeV=dureeV;
-   this.versementV=versementV;
-   this.locataireV=locataireV;}
+      this.idLocal=idLocal;
+      this.etageNporteV=etageNporteV;
+      this.surfaceV=surfaceV;
+      this.FiV=FiV;
+      this.prixV=prixV;
+      this.descriptionV=descriptionV;  
+      this.dateDebutV=dateDebutV;
+      this.dureeV=dureeV;
+      this.versementV=versementV;
+      this.locataireV=locataireV;
+   }
  /**
     * Le constructeur par défaut de la classe.
     */
@@ -197,17 +198,16 @@ public class Local {
     /**
     * Cette méthode permet d'insérer un local dans la BDD.
     */
-   public void insererLocal()
-   {
-   String query="INSERT INTO locaux (etageNumPorte, prix, surface, description, nombrePieces ) VALUES ('"+this.etageNporteV+"','" +this.prixV+"','" +this.surfaceV+"','"+this.descriptionV+"',"+this.FiV+")";
-          try {
-          
-            ConxionBDD.stmt.executeUpdate(query);
-        } catch (SQLException ex) {
-            Logger.getLogger(AjouterLocal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+   public void insererLocal(){
+     String query="INSERT INTO locaux (etageNumPorte, prix, surface, description, nombrePieces ) VALUES ('"+this.etageNporteV+"','" +this.prixV+"','" +this.surfaceV+"','"+this.descriptionV+"',"+this.FiV+")";
+     try{
+          ConxionBDD.stmt.executeUpdate(query);
+        } catch (SQLException ex) 
+                {
+               Logger.getLogger(AjouterLocal.class.getName()).log(Level.SEVERE, null, ex);
+                }
    
-       }
+    }
    
    /**
  * Cette méthode recherche un local par son étage et le numéro de porte, le prix, la surface, le nombre de pièces et la description du local
@@ -215,29 +215,28 @@ public class Local {
  * sinon, elle retourne l'id du local correspondant aux critères de recherche.
  * @return 
  */ 
-   public int rechercherLocal()
-{ int i=-1;
-try{
-String query;
-      
-query= " SELECT idLocal FROM locaux  WHERE etageNumPorte = '"+this.etageNporteV+"' AND prix = "+this.prixV+" AND surface = "+this.surfaceV+" AND  nombrePieces = "+this.FiV+" AND description = '"+this.descriptionV+"'";
-ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
-ResultSet rs= ConxionBDD.stmt.executeQuery(query);
-while(rs.next()) i=rs.getInt(1);
+   public int rechercherLocal(){
+     int i=-1;
+     try{
+          String query;
+          query= " SELECT idLocal FROM locaux  WHERE etageNumPorte = '"+this.etageNporteV+"' AND prix = "+this.prixV+" AND surface = "+this.surfaceV+" AND  nombrePieces = "+this.FiV+" AND description = '"+this.descriptionV+"'";
+          ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
+          ResultSet rs= ConxionBDD.stmt.executeQuery(query);
+          while(rs.next()) i=rs.getInt(1);
 
-  }catch ( SQLException sqlException )
-    {}
-return i;
+        }catch ( SQLException sqlException )
+                {sqlException.printStackTrace();}
+     return i;
 }
 
    /**
     *Cette méthode permet de supprimer un local de la BDD 
     */
-   public void supprimerLocal()
-   { try {
-            String query = "DELETE FROM locaux WHERE idLocal = "+idLocal;
-            ConxionBDD.stmt.executeUpdate(query);
-        } catch (SQLException sqlException )
-    {  sqlException.printStackTrace(); }
-    }
+   public void supprimerLocal(){
+     try {
+           String query = "DELETE FROM locaux WHERE id = "+idLocal;
+           ConxionBDD.stmt.executeUpdate(query);
+         } catch (SQLException sqlException )
+                 {sqlException.printStackTrace(); }
+   }
 }

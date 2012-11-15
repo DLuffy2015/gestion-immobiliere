@@ -24,12 +24,12 @@ public class AjouterLocation extends javax.swing.JFrame {
              this.setLocationRelativeTo(null);
              location.getLocal().setIdLocal(idLocal);
              location.initialiserLocation();
-              
              locataire.setText(location.getLocataire().getNomV());
              local.setText(location.getLocal().getEtageNporteV());
              surface.setText(location.getLocal().getSurfaceV());
              versement.setText(location.getLocal().getVersementV());
-             if(!location.getLocal().getDateDebutV().equals("")){dateDebut.setValue(Location.convertirDate(location.getLocal().getDateDebutV()));}
+             if(!(((location.getLocal()).getDateDebutV())==null)){
+                 dateDebut.setValue(Location.convertirDate(location.getLocal().getDateDebutV()));}
              prix.setText(location.getLocal().getPrixV());
              duree.setText(location.getLocal().getDureeV());
              description.setText(location.getLocal().getDescriptionV());
@@ -137,12 +137,12 @@ public class AjouterLocation extends javax.swing.JFrame {
 
         jLabel7.setText("Surface :");
 
-        surface.setEnabled(false);
         surface.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 surfaceActionPerformed(evt);
             }
         });
+        surface.setEnabled(false);
 
         jLabel8.setText("Description");
 
