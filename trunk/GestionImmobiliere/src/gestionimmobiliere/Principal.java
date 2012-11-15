@@ -44,6 +44,9 @@ public class Principal extends javax.swing.JFrame {
 
         menuTabLocaux = new javax.swing.JPopupMenu();
         AjoutLocation = new javax.swing.JMenuItem();
+        SuppLocation = new javax.swing.JMenuItem();
+        menuTabLocataires = new javax.swing.JPopupMenu();
+        SuppLocataire = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         AjouLocal = new javax.swing.JButton();
@@ -78,6 +81,22 @@ public class Principal extends javax.swing.JFrame {
         });
         menuTabLocaux.add(AjoutLocation);
 
+        SuppLocation.setText("supprimerLocation");
+        SuppLocation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SuppLocationActionPerformed(evt);
+            }
+        });
+        menuTabLocaux.add(SuppLocation);
+
+        SuppLocataire.setText("supprimerLocataire");
+        SuppLocataire.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SuppLocataireActionPerformed(evt);
+            }
+        });
+        menuTabLocataires.add(SuppLocataire);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         AjouLocal.setText("Ajouter un local");
@@ -101,7 +120,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\imane\\Documents\\NetBeansProjects\\GestionImmobiliere\\images\\f_446961181-1422871112.jpg")); // NOI18N
         jLabel3.setText("jLabel3");
 
         jLabel4.setText("75M² -3pieces-1er etage");
@@ -109,8 +127,6 @@ public class Principal extends javax.swing.JFrame {
         jLabel5.setText("centre Ain benian");
 
         jLabel6.setText("prix 22milles dinars(Négociable)");
-
-        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\imane\\Documents\\NetBeansProjects\\GestionImmobiliere\\images\\prospection-villa-alger-14187_1_640.jpg")); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -127,13 +143,11 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(32, 32, 32)
                                 .addComponent(Apropo, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -261,6 +275,11 @@ public class Principal extends javax.swing.JFrame {
         jTable1.setShowVerticalLines(false);
 
         jTable1.getTableHeader().setReorderingAllowed(false);
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -405,6 +424,43 @@ detailRech=detailRecherche.getText();
         
     }//GEN-LAST:event_AjoutLocationActionPerformed
 
+    private void SuppLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuppLocationActionPerformed
+     try {
+            int det=jTable1.getSelectedRow() ;
+                  boolean rsVide=rsLocaux.first();
+                 if(rsVide){
+                   rsLocaux.absolute(det+1);
+                  localASupprimer.setIdLocal(rsLocaux.getInt(1));
+                  localASupprimer.supprimerLocal();
+                  ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
+                  initTabLocaux( " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,agence_immobiliere.locataire.nom FROM locaux LEFT JOIN locataire on agence_immobiliere.locaux.locataire=agence_immobiliere.locataire.id WHERE 1");
+                 }
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_SuppLocationActionPerformed
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        if((evt.getButton()==3)&&(jTable2.getSelectedRowCount()==1)){
+            menuTabLocataires.show(jTable2,evt.getX(),evt.getY());
+        }
+    }//GEN-LAST:event_jTable2MouseClicked
+
+    private void SuppLocataireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuppLocataireActionPerformed
+        try {
+            int det=jTable2.getSelectedRow() ;
+               boolean rsVide=rsLocataires.first();
+              if(rsVide){
+                rsLocataires.absolute(det+1);
+                locataireASupprimer.supprimerLocataire(rsLocataires.getInt(1));
+                ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
+                initTabLocataires();}
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_SuppLocataireActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -541,11 +597,15 @@ query ="SELECT id, nom, telephone, mail, adresse FROM locataire WHERE 1";
     private String detailRech="";
     private static ResultSet rsLocaux;
     private static ResultSet rsLocataires;
+    private Local localASupprimer=new Local();
+    private Locataire locataireASupprimer=new Locataire();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AjouLocal;
     private javax.swing.JButton AjouLocataire;
     private javax.swing.JMenuItem AjoutLocation;
     private javax.swing.JButton Apropo;
+    private javax.swing.JMenuItem SuppLocataire;
+    private javax.swing.JMenuItem SuppLocation;
     private javax.swing.JComboBox critereRechercher;
     private javax.swing.JTextField detailRecherche;
     private javax.swing.JLabel jLabel1;
@@ -568,6 +628,7 @@ query ="SELECT id, nom, telephone, mail, adresse FROM locataire WHERE 1";
     private static javax.swing.JTable jTable1;
     private static javax.swing.JTable jTable2;
     private javax.swing.JButton lancerRecherche;
+    private javax.swing.JPopupMenu menuTabLocataires;
     private javax.swing.JPopupMenu menuTabLocaux;
     // End of variables declaration//GEN-END:variables
 }

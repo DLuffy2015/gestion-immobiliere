@@ -17,6 +17,7 @@ import java.util.logging.Logger;
  *Cette classe permet de créer un objet LOCATAIRE. Elle contient en plus des getters et des stters:
  *Deux constructeurs,
  *Une méthode d'initialisation,
+ *Une méthode de suppression,
  *Et une méthode de recherche dans la BDD.
  **/
 public class Locataire {
@@ -135,6 +136,14 @@ public class Locataire {
         
     
     }
-    
-   
+    /**
+     * Cette méthode permet de supprimer un locataire de la BDD 
+     */
+  public void supprimerLocataire(int idLocataire)
+   { try {
+            String query = "DELETE FROM locataire WHERE idLocaaire = "+idLocataire;
+            ConxionBDD.stmt.executeUpdate(query);
+        } catch (SQLException sqlException )
+    {  sqlException.printStackTrace(); }
+    }  
 }

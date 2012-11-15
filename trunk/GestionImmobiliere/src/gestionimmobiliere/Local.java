@@ -19,6 +19,7 @@ import java.util.logging.Logger;
  *Cette classe permet de créer un objet LOCAL. Elle contient en plus des getters et des stters:
  *Deux constructeurs,
  *Une méthode d'insertion dans la BDD,
+ *Une méthode de suppression,
  *Et une méthode de recherche dans la BDD.
  **/
 public class Local {
@@ -233,5 +234,14 @@ while(rs.next()) i=rs.getInt(1);
 return i;
 }
 
-   
+   /**
+    *Cette méthode permet de supprimer un local de la BDD 
+    */
+   public void supprimerLocal()
+   { try {
+            String query = "DELETE FROM locaux WHERE idLocal = "+idLocal;
+            ConxionBDD.stmt.executeUpdate(query);
+        } catch (SQLException sqlException )
+    {  sqlException.printStackTrace(); }
+    }
 }
