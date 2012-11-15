@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gestionimmobiliere;
 
 import java.sql.*;
@@ -10,6 +6,10 @@ import javax.swing.*;
 /**
  *
  * @author user
+ */
+/**
+ * 
+ * Cette classe permet d'établir la connexion entre le projet sur Netbeans et la BDD sur le serveur.
  */
 public class ConxionBDD {
 
@@ -26,7 +26,9 @@ public class ConxionBDD {
 
   //*********************************************************************//
 
-
+/**
+ * Cette méthode permet d'établir la connexion entre le projet et la BDD.
+ */
 public static void connect() {
    String url = "jdbc:mysql://localhost:3306/agence_immobiliere";
 
@@ -70,7 +72,9 @@ public static void connect() {
 //------------------------------------------------------------------------------
 //                       FONCTION DE DECONNECTION A LA BDD
 //------------------------------------------------------------------------------
-
+/**
+ * Cette méthode permet de fermer la BDD.
+ */
     public static void close() {
         try {
             //statement = connect.createStatement();
