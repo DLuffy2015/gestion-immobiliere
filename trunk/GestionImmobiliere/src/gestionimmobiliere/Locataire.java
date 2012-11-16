@@ -29,7 +29,10 @@ import java.util.logging.Logger;
    /**
     * 
     * Le constructeur de la classe qui permet de créer une instance de la classe en précisant tout ses paramètres.
-    * 
+    * @param nomV le nom du locataire
+    * @param mailV l'e_mail du locataire
+    * @param téléphoneV le numéro de téléphone du locataire
+    * @param adresseV l'adresse du locataire
     */
     public Locataire(String nom,String mail, String telephone, String adresse){
       nomV=nom;
@@ -45,6 +48,7 @@ import java.util.logging.Logger;
    /**
     * 
     * Cette méthode retourne le nom du locataire
+    * @return le nom du locataire
     */
     public String getNomV() {
         return nomV;
@@ -52,6 +56,7 @@ import java.util.logging.Logger;
    /**
     * 
     * Cette méthode affecte le paramètre en entrée (nomV) au champs (nomV) de l'instance de la classe
+    * @param le nom du locataire
     */
     public void setNomV(String nomV) {
         this.nomV = nomV;
@@ -59,6 +64,7 @@ import java.util.logging.Logger;
    /**
     * 
     * Cette méthode retourne le mail du locataire
+    * @return le mail du locataire
     */
     public String getMailV() {
         return mailV;
@@ -66,6 +72,7 @@ import java.util.logging.Logger;
    /**
     * 
     * Cette méthode affecte le paramètre en entrée (mailV) au champs (mailV) de l'instance de la classe
+    * @param l'e_mail du locataire
     */
     public void setMailV(String mailV) {
         this.mailV = mailV;
@@ -73,6 +80,7 @@ import java.util.logging.Logger;
    /**
     * 
     * Cette méthode retourne le numéro de téléphone du locataire
+    * @return le numéro de telephone du locataire
     */
     public String getTéléphoneV() {
         return téléphoneV;
@@ -80,6 +88,7 @@ import java.util.logging.Logger;
    /**
     * 
     * Cette méthode affecte le paramètre en entrée (téléphoneV) au champs (téléphoneV) de l'instance de la classe
+    * @param le numéro de telephone du locataire
     */
     public void setTéléphoneV(String téléphoneV) {
         this.téléphoneV = téléphoneV;
@@ -87,6 +96,7 @@ import java.util.logging.Logger;
    /**
     * 
     * Cette méthode retourne l'adresse du locataire
+    * @return l'adresse du locataire
     */
     public String getAdresseV() {
         return adresseV;
@@ -94,6 +104,7 @@ import java.util.logging.Logger;
    /**
     * 
     * Cette méthode affecte le paramètre en entrée (adresseV) au champs (adresseV) de l'instance de la classe
+    *@param l'adresse du locataire
     */
     public void setAdresseV(String adresseV) {
         this.adresseV = adresseV;
@@ -104,7 +115,7 @@ import java.util.logging.Logger;
     * Cette méthode recherche un locataire par son nom . 
     * Elle retourne un entier: égal à -1 si le locataire n'existent pas dans la table 'locataire' de la BDD;
     * sinon, elle retourne l'id du locataire.
-    * @return 
+    * @return id du locataire dans la base de donnée
     */ 
     public int rechercherLocataire(){ 
       int i=-1;
@@ -139,6 +150,7 @@ import java.util.logging.Logger;
      }
     /**
      * Cette méthode permet de supprimer un locataire de la BDD 
+     * @param idLocataire l'id du locataire dans la base de donnée
      */
      public void supprimerLocataire(int idLocataire){
        try {

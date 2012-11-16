@@ -384,7 +384,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_AjouLocalActionPerformed
 
     private void ApropoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApropoActionPerformed
-      
+     
     }//GEN-LAST:event_ApropoActionPerformed
 
     private void AjouLocataireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AjouLocataireActionPerformed
@@ -563,7 +563,7 @@ public class Principal extends javax.swing.JFrame {
     }
     /**
      * 
-     * @param query 
+     * @param query  une requette de recupération des locaux de la base de donnée
      * Cette méthode permet d'initialiser la table des locaux avec tout les locaux existants dans la BDD.
      */
     public static void initTabLocaux(String query){
