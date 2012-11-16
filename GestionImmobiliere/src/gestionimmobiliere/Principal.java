@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author user
+ * @author imane
  */
 /**
  *
@@ -219,6 +219,14 @@ public class Principal extends javax.swing.JFrame {
                 detailRechercheActionPerformed(evt);
             }
         });
+        detailRecherche.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                detailRechercheKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                detailRechercheKeyReleased(evt);
+            }
+        });
 
         msgErreur.setText(" ");
 
@@ -371,8 +379,8 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AjouLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AjouLocalActionPerformed
-   AjouterLocal local=new AjouterLocal();
-   local.setVisible(true);
+       AjouterLocal local=new AjouterLocal();
+       local.setVisible(true);
     }//GEN-LAST:event_AjouLocalActionPerformed
 
     private void ApropoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApropoActionPerformed
@@ -395,43 +403,54 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_critereRechercherActionPerformed
 
     private void detailRechercheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailRechercheActionPerformed
-detailRech=detailRecherche.getText();
     }//GEN-LAST:event_detailRechercheActionPerformed
 
     private void lancerRechercheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lancerRechercheActionPerformed
-        int indice=0;
-         int nbPiece=0;
-        if(critereRech!=0){
-    switch (critereRech)
-       {
+      int indice=0;
+      int nbPiece=0;
+      if(critereRech!=0)
+      {
+        switch (critereRech)
+        {
            case 1: 
            {
                initTabLocaux( "SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,agence_immobiliere.locataire.nom FROM locaux LEFT JOIN locataire ON agence_immobiliere.locaux.locataire=agence_immobiliere.locataire.id WHERE locaux.prix = '"+detailRech+"'");
-           }break;
+           }
+           break;
            case 2:
-           { try{
-                nbPiece=Integer.parseInt(detailRech);
-               }catch(NumberFormatException e){
-             msgErreur.setText("La valeur saisie doit etre un entier");
-             indice=1; }
-             if(indice==0)  initTabLocaux( "SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,agence_immobiliere.locataire.nom FROM locaux LEFT JOIN locataire ON agence_immobiliere.locaux.locataire=agence_immobiliere.locataire.id WHERE locaux.nombrePieces = "+nbPiece);
-           }break;
+           {
+               try{
+                   nbPiece=Integer.parseInt(detailRech);
+                  }catch(NumberFormatException e)
+                  {
+                    msgErreur.setText("La valeur saisie doit etre un entier");
+                    indice=1; 
+                  }
+              if(indice==0)  
+                  initTabLocaux( "SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,agence_immobiliere.locataire.nom FROM locaux LEFT JOIN locataire ON agence_immobiliere.locaux.locataire=agence_immobiliere.locataire.id WHERE locaux.nombrePieces = "+nbPiece);
+           }
+           break;
            case 3:
-           {initTabLocaux( "SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,agence_immobiliere.locataire.nom FROM locaux LEFT JOIN locataire ON agence_immobiliere.locaux.locataire=agence_immobiliere.locataire.id WHERE locaux.locataire = NULL");
+           {
+               initTabLocaux( "SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,agence_immobiliere.locataire.nom FROM locaux LEFT JOIN locataire ON agence_immobiliere.locaux.locataire=agence_immobiliere.locataire.id WHERE locaux.locataire = NULL");
                 
-           }break;
+           }
+           break;
            case 4:
            {
                initTabLocaux( "SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,agence_immobiliere.locataire.nom FROM locaux LEFT JOIN locataire ON agence_immobiliere.locaux.locataire=agence_immobiliere.locataire.id WHERE locaux.locataire <> NULL");
-           }break;
-        }    }
+           }
+           break;
+        }    
+      }
             
     }//GEN-LAST:event_lancerRechercheActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-    if((evt.getButton()==3)&&(jTable1.getSelectedRowCount()==1)){
-            menuTabLocaux.show(jTable1,evt.getX(),evt.getY());
-        }
+    if((evt.getButton()==3)&&(jTable1.getSelectedRowCount()==1))
+    {
+       menuTabLocaux.show(jTable1,evt.getX(),evt.getY());
+    }
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void AjoutLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AjoutLocationActionPerformed
@@ -454,15 +473,16 @@ detailRech=detailRecherche.getText();
     private void SuppLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuppLocationActionPerformed
      try {
             int det=jTable1.getSelectedRow() ;
-                  boolean rsVide=rsLocaux.first();
-                  if(rsVide){
+            boolean rsVide=rsLocaux.first();
+            if(rsVide)
+            {
                   rsLocaux.absolute(det+1);
                   localASupprimer.setIdLocal(rsLocaux.getInt(1));
                   localASupprimer.supprimerLocal();
                   ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
                   initTabLocaux( " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,agence_immobiliere.locataire.nom FROM locaux LEFT JOIN locataire on agence_immobiliere.locaux.locataire=agence_immobiliere.locataire.id WHERE 1");
-                 }
-        } catch (SQLException ex) 
+            }
+         } catch (SQLException ex) 
                 {
                   Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -482,12 +502,12 @@ detailRech=detailRecherche.getText();
                boolean rsVide=rsLocataires.first();
                if(rsVide)
                {
-                rsLocataires.absolute(det+1);
-                locataireASupprimer.supprimerLocataire(rsLocataires.getInt(1));
-                ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
-                initTabLocataires();
-                ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
-                initTabLocaux( " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,agence_immobiliere.locataire.nom FROM locaux LEFT JOIN locataire on agence_immobiliere.locaux.locataire=agence_immobiliere.locataire.id WHERE 1");
+                  rsLocataires.absolute(det+1);
+                  locataireASupprimer.supprimerLocataire(rsLocataires.getInt(1));
+                  ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
+                  initTabLocataires();
+                  ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
+                  initTabLocaux( " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,agence_immobiliere.locataire.nom FROM locaux LEFT JOIN locataire on agence_immobiliere.locaux.locataire=agence_immobiliere.locataire.id WHERE 1");
               }
             } catch (SQLException ex) 
                      {
@@ -498,6 +518,13 @@ detailRech=detailRecherche.getText();
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
        this.dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void detailRechercheKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_detailRechercheKeyPressed
+    }//GEN-LAST:event_detailRechercheKeyPressed
+
+    private void detailRechercheKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_detailRechercheKeyReleased
+       detailRech=detailRecherche.getText();       
+    }//GEN-LAST:event_detailRechercheKeyReleased
 
     /**
      * @param args the command line arguments
@@ -541,37 +568,43 @@ detailRech=detailRecherche.getText();
      */
     public static void initTabLocaux(String query){
         try {
-            ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
-            rsLocaux= ConxionBDD.stmt.executeQuery(query);
-        } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
- int row=0;
- while(jTable1.getRowCount()!=0){  model.removeRow(0); } 
-        try {
-            while(rsLocaux.next()){
-
-            if(row>=jTable1.getRowCount())
+              ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
+              rsLocaux= ConxionBDD.stmt.executeQuery(query);
+            } catch (SQLException ex)
+              {
+                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+              }
+       int row=0;
+       while(jTable1.getRowCount()!=0)
+       {  
+           model.removeRow(0);
+       } 
+       try {
+            while(rsLocaux.next())
             {
-            model.insertRow(jTable1.getRowCount(),new Object[]{"","","",""});}
-            jTable1.setValueAt(rsLocaux.getString(2),row,0);
-            jTable1.setValueAt(rsLocaux.getString(3),row,1);
-            jTable1.setValueAt(rsLocaux.getString(4),row,2);
-            jTable1.setValueAt(rsLocaux.getString(5),row,3); 
-            row++;
-            }       
-        } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
+                if(row>=jTable1.getRowCount())
+                 {
+                   model.insertRow(jTable1.getRowCount(),new Object[]{"","","",""});
+                 }
+                jTable1.setValueAt(rsLocaux.getString(2),row,0);
+                jTable1.setValueAt(rsLocaux.getString(3),row,1);
+                jTable1.setValueAt(rsLocaux.getString(4),row,2);
+                jTable1.setValueAt(rsLocaux.getString(5),row,3); 
+                row++;
+           }       
+          } catch (SQLException ex)
+                  {
+                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                  }
+     }
+   
     /**
      * 
      * Cette méthode permet d'initialiser la table des locataires avec tout les locataires existants dans la BDD.
      */
     public static void initTabLocataires(){
-    String query;
-query ="SELECT id, nom, telephone, mail, adresse FROM locataire WHERE 1";
+        String query;
+        query ="SELECT id, nom, telephone, mail, adresse FROM locataire WHERE 1";
         try {
               ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
               rsLocataires = ConxionBDD.stmt.executeQuery(query);
@@ -580,7 +613,6 @@ query ="SELECT id, nom, telephone, mail, adresse FROM locataire WHERE 1";
                       Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
                     }
        
-        
         int row=0;
         while(jTable2.getRowCount()!=0)
         {  
@@ -590,15 +622,15 @@ query ="SELECT id, nom, telephone, mail, adresse FROM locataire WHERE 1";
             while(rsLocataires.next())
              {
 
-              if(row>=jTable2.getRowCount())
-              {
-                model1.insertRow(jTable2.getRowCount(),new Object[]{"","","",""});
-              }
-              jTable2.setValueAt(rsLocataires.getString(2),row,0);
-              jTable2.setValueAt(rsLocataires.getString(4),row,1);
-              jTable2.setValueAt(rsLocataires.getString(3),row,2);
-              jTable2.setValueAt(rsLocataires.getString(5),row,3); 
-              row++;
+               if(row>=jTable2.getRowCount())
+               {
+                 model1.insertRow(jTable2.getRowCount(),new Object[]{"","","",""});
+               }
+               jTable2.setValueAt(rsLocataires.getString(2),row,0);
+               jTable2.setValueAt(rsLocataires.getString(4),row,1);
+               jTable2.setValueAt(rsLocataires.getString(3),row,2);
+               jTable2.setValueAt(rsLocataires.getString(5),row,3); 
+               row++;
             }       
            } catch (SQLException ex) 
                    {

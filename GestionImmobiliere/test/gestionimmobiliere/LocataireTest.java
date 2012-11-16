@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package gestionimmobiliere;
 
 import org.junit.After;
@@ -13,8 +10,13 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author user
+ * @author imane
  */
+
+/**
+ * Cette classe permet de faire les testes unitaires sur les methodes de la class Locataire du projet
+ */
+
 public class LocataireTest {
     Locataire instance;
     public LocataireTest() {
@@ -31,14 +33,7 @@ public class LocataireTest {
         ConxionBDD.close();
     }
     
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-
+   
     /**
      * Test of getNomV method, of class Locataire.
      */
@@ -48,7 +43,6 @@ public class LocataireTest {
         String expResult = "asma";
         String result = instance.getNomV();
         assertEquals(expResult, result);
-        
     }
 
     /**
@@ -61,7 +55,6 @@ public class LocataireTest {
         instance.setNomV(nomV);
         String result=instance.getNomV();
         assertEquals(nomV, result);
-       
     }
 
     /**
@@ -73,8 +66,7 @@ public class LocataireTest {
         String expResult = "asma28@hotmail.fr";
         String result = instance.getMailV();
         assertEquals(expResult, result);
-       
-    }
+     }
 
     /**
      * Test of setMailV method, of class Locataire.
@@ -86,8 +78,7 @@ public class LocataireTest {
         instance.setMailV(mailV);
         String result= instance.getMailV();
         assertEquals(mailV,result);
-      
-    }
+     }
 
     /**
      * Test of getTéléphoneV method, of class Locataire.
@@ -98,7 +89,6 @@ public class LocataireTest {
         String expResult = "0556789567";
         String result = instance.getTéléphoneV();
         assertEquals(expResult, result);
-        
     }
 
     /**
@@ -111,7 +101,6 @@ public class LocataireTest {
         instance.setTéléphoneV(téléphoneV);
         String result=instance.getTéléphoneV();
         assertEquals(téléphoneV,result);
-       
     }
 
     /**
@@ -123,8 +112,7 @@ public class LocataireTest {
         String expResult = "cité mohammadia Bt 23 Num 89";
         String result = instance.getAdresseV();
         assertEquals(expResult, result);
-       
-    }
+   }
 
     /**
      * Test of setAdresseV method, of class Locataire.
@@ -136,22 +124,6 @@ public class LocataireTest {
         instance.setAdresseV(adresseV);
         String result=instance.getAdresseV();
         assertEquals(adresseV, result);
-        
-    }
-
-
-    /**
-     * Test of insererLocataire method, of class Locataire.
-     */
-    @Test
-    public void testInsererLocataire() {
-        System.out.println("insererLocataire");
-        Locataire instance = new Locataire("meddahi imane","ai_meddahi@esi.dz","0553669877","Dar el beida");
-        instance.insererLocataire();
-        int expResult = -1;//id du locataire 
-        int result = instance.rechercherLocataire();
-        assertTrue(result!=expResult);
-        //assertEquals(expResult, result); comment verifier != -1
     }
 
     /**
@@ -160,31 +132,43 @@ public class LocataireTest {
     @Test
     public void testRechercherLocataire() {
         System.out.println("rechercherLocataire (n'existe pas)");
-        Locataire instance = new Locataire();
-        instance.setNomV("Samia B");
-        int expResult = -1;//id du locataire
-        int result = instance.rechercherLocataire();
+        Locataire instancet = new Locataire();
+        instancet.setNomV("Samia B");
+        int expResult = -1;
+        int result = instancet.rechercherLocataire();
         assertEquals(expResult, result);
        
-         System.out.println("rechercherLocataire (existe)");
-         instance.setNomV("Tebbi souad");
-         expResult = 1;
-         result = instance.rechercherLocataire();
-         assertEquals(expResult, result);
-        
-    }
+        System.out.println("rechercherLocataire (existe)");
+        instancet.setNomV("Tebbi souad");
+        expResult = 1;
+        result = instancet.rechercherLocataire();
+        assertEquals(expResult, result);
+     }
     
+    /**
+     * Test of insererLocataire method, of class Locataire.
+     */
+    @Test
+    public void testInsererLocataire() {
+        System.out.println("insererLocataire");
+        Locataire instancet = new Locataire("meddahi imane","ai_meddahi@esi.dz","0553669877","Dar el beida");
+        instancet.insererLocataire();
+        int expResult = -1;
+        int result = instancet.rechercherLocataire();
+        assertTrue(result!=expResult);
+    }
+
     /**
      * Test of supprimerLocataire method, of class Locataire.
      */
     @Test
     public void supprimerLocataire() {
         System.out.println("supprimerLocataire");
-        Locataire instance = new Locataire();
-        instance.supprimerLocataire(2);
-        int expResult = -1;//id du locataire
+        Locataire instancet = new Locataire();
+        instancet.supprimerLocataire(2);
+        int expResult = -1;
         int result = instance.rechercherLocataire();
         assertEquals(expResult, result);
-           
-    }
+     }
+
 }

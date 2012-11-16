@@ -21,8 +21,6 @@ public class AjouterLocataire extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
     
-
-
      /**
      * Cette méthode est appellée dans le constructeur pour initialiser la fenêtre.
      * Attention: Ne pas modifier son code!
@@ -69,12 +67,22 @@ public class AjouterLocataire extends javax.swing.JFrame {
                 nomPrénomActionPerformed(evt);
             }
         });
+        nomPrénom.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nomPrénomKeyReleased(evt);
+            }
+        });
 
         jLabel2.setText("Mail");
 
         mail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mailActionPerformed(evt);
+            }
+        });
+        mail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                mailKeyReleased(evt);
             }
         });
 
@@ -85,6 +93,11 @@ public class AjouterLocataire extends javax.swing.JFrame {
                 téléphoneActionPerformed(evt);
             }
         });
+        téléphone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                téléphoneKeyReleased(evt);
+            }
+        });
 
         jLabel4.setText("Le champs avec * est obligatoire!");
 
@@ -93,6 +106,11 @@ public class AjouterLocataire extends javax.swing.JFrame {
         adresse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 adresseActionPerformed(evt);
+            }
+        });
+        adresse.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                adresseKeyReleased(evt);
             }
         });
 
@@ -173,15 +191,12 @@ public class AjouterLocataire extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void nomPrénomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomPrénomActionPerformed
-       locataire.setNomV(nomPrénom.getText());
     }//GEN-LAST:event_nomPrénomActionPerformed
 
     private void mailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mailActionPerformed
-       locataire.setMailV(mail.getText());
     }//GEN-LAST:event_mailActionPerformed
 
     private void téléphoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_téléphoneActionPerformed
-       locataire.setTéléphoneV(téléphone.getText());
     }//GEN-LAST:event_téléphoneActionPerformed
 
     private void annulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerActionPerformed
@@ -208,8 +223,23 @@ public class AjouterLocataire extends javax.swing.JFrame {
     }//GEN-LAST:event_validerActionPerformed
 
     private void adresseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adresseActionPerformed
-       locataire.setAdresseV(adresse.getText());       
     }//GEN-LAST:event_adresseActionPerformed
+
+    private void nomPrénomKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nomPrénomKeyReleased
+        locataire.setNomV(nomPrénom.getText());
+    }//GEN-LAST:event_nomPrénomKeyReleased
+
+    private void mailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mailKeyReleased
+        locataire.setMailV(mail.getText());
+    }//GEN-LAST:event_mailKeyReleased
+
+    private void téléphoneKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_téléphoneKeyReleased
+        locataire.setTéléphoneV(téléphone.getText()); 
+    }//GEN-LAST:event_téléphoneKeyReleased
+
+    private void adresseKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_adresseKeyReleased
+         locataire.setAdresseV(adresse.getText()); 
+    }//GEN-LAST:event_adresseKeyReleased
 
     private Locataire locataire=new Locataire();
     // Variables declaration - do not modify//GEN-BEGIN:variables

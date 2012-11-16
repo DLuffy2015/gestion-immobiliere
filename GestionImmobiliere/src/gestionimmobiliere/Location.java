@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author user
+ * @author souad
  */
 /**
  *Cette classe permet de créer un objet LOCATION. Elle contient en plus des getters et des stters:

@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author user
+ * @author souad
  */
 /**
  *Cette classe permet de créer un objet LOCATAIRE. Elle contient en plus des getters et des stters:
@@ -26,16 +26,16 @@ import java.util.logging.Logger;
     private String mailV="";
     private String téléphoneV="";
     private String adresseV="";
-/**
+   /**
     * 
     * Le constructeur de la classe qui permet de créer une instance de la classe en précisant tout ses paramètres.
     * 
     */
-    public Locataire(String nom,String mail, String telephone, String adresse)
-    {nomV=nom;
-    mailV=mail;
-    téléphoneV=telephone;
-    adresseV=adresse;
+    public Locataire(String nom,String mail, String telephone, String adresse){
+      nomV=nom;
+      mailV=mail;
+      téléphoneV=telephone;
+      adresseV=adresse;
     }
      /**
     * Le constructeur par défaut de la classe.

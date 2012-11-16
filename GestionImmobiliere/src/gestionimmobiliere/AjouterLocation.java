@@ -2,17 +2,17 @@ package gestionimmobiliere;
 
 import java.text.SimpleDateFormat;
 
-/**
- *
- * @author imane
- */
-/**
-* Cette classe permet de créer une fenêtre d'ajout de location initialisée selon la BDD avec les coordonnées correspondantes 
-* au local choisi à partir de la fenêtre principale.
-* Elle contient un constructeur.
-*/
+ /**
+  *
+  * @author imane
+  */
+ /**
+  * Cette classe permet de créer une fenêtre d'ajout de location initialisée selon la BDD avec les coordonnées correspondantes 
+  * au local choisi à partir de la fenêtre principale.
+  * Elle contient un constructeur.
+  */
 public class AjouterLocation extends javax.swing.JFrame {
-/**
+   /**
     * 
     * Le constructeur de la classe permet de créer une instance de la classe en initialisant la variable 'location'
     * avec ses coordonnées à partir de la BDD et remplir les champs de texte avec ces coordonnées.
@@ -28,12 +28,14 @@ public class AjouterLocation extends javax.swing.JFrame {
              local.setText(location.getLocal().getEtageNporteV());
              surface.setText(location.getLocal().getSurfaceV());
              versement.setText(location.getLocal().getVersementV());
-             if(!(((location.getLocal()).getDateDebutV())==null)){
-                 dateDebut.setValue(Location.convertirDate(location.getLocal().getDateDebutV()));}
+             if(!(((location.getLocal()).getDateDebutV())==null))
+             {
+                 dateDebut.setValue(Location.convertirDate(location.getLocal().getDateDebutV()));
+             }
              prix.setText(location.getLocal().getPrixV());
              duree.setText(location.getLocal().getDureeV());
              description.setText(location.getLocal().getDescriptionV());
-                                       }
+         }
 
   
     /**
@@ -77,12 +79,22 @@ public class AjouterLocation extends javax.swing.JFrame {
                 locataireActionPerformed(evt);
             }
         });
+        locataire.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                locataireKeyReleased(evt);
+            }
+        });
 
         jLabel2.setText("N° de porte :");
 
         local.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 localActionPerformed(evt);
+            }
+        });
+        local.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                localKeyReleased(evt);
             }
         });
         local.setEditable(false);
@@ -94,6 +106,11 @@ public class AjouterLocation extends javax.swing.JFrame {
                 versementActionPerformed(evt);
             }
         });
+        versement.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                versementKeyReleased(evt);
+            }
+        });
 
         jLabel4.setText("Date début :");
 
@@ -102,6 +119,11 @@ public class AjouterLocation extends javax.swing.JFrame {
         duree.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dureeActionPerformed(evt);
+            }
+        });
+        duree.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                dureeKeyReleased(evt);
             }
         });
 
@@ -134,12 +156,22 @@ public class AjouterLocation extends javax.swing.JFrame {
                 prixActionPerformed(evt);
             }
         });
+        prix.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                prixKeyReleased(evt);
+            }
+        });
 
         jLabel7.setText("Surface :");
 
         surface.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 surfaceActionPerformed(evt);
+            }
+        });
+        surface.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                surfaceKeyReleased(evt);
             }
         });
         surface.setEnabled(false);
@@ -282,58 +314,75 @@ public class AjouterLocation extends javax.swing.JFrame {
 
     private void validerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerActionPerformed
         int id= location.getLocataire().rechercherLocataire(); 
-        if(id !=-1){
-                 location.getLocal().setLocataireV(id);
-                 location.miseAJourLocal();
-                 Principal.initTabLocaux( " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,locataire.nom FROM locaux LEFT JOIN locataire on locaux.locataire=locataire.id WHERE 1");
-                 this.dispose();}
-             else{ 
-                 msgErreur.setText("Veuiller saisir un locataire existant!"); }
+        if(id !=-1)
+        {
+           location.getLocal().setLocataireV(id);
+           location.miseAJourLocal();
+           Principal.initTabLocaux( " SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,locataire.nom FROM locaux LEFT JOIN locataire on locaux.locataire=locataire.id WHERE 1");
+           this.dispose();
+        }
+        else
+        { 
+           msgErreur.setText("Veuiller saisir un locataire existant!"); 
+        }
     }//GEN-LAST:event_validerActionPerformed
 
     private void locataireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locataireActionPerformed
-         location.getLocataire().setNomV(locataire.getText());
+       
     }//GEN-LAST:event_locataireActionPerformed
 
     private void localActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_localActionPerformed
-                     
+                
     }//GEN-LAST:event_localActionPerformed
 
     private void versementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_versementActionPerformed
-        location.getLocal().setVersementV(versement.getText());
-        
     }//GEN-LAST:event_versementActionPerformed
 
     private void dureeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dureeActionPerformed
-        location.getLocal().setDureeV(duree.getText());  
-        
     }//GEN-LAST:event_dureeActionPerformed
 
     private void dateDebutStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_dateDebutStateChanged
         Object d= dateDebut.getValue();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         location.getLocal().setDateDebutV(simpleDateFormat.format(d));
-       
     }//GEN-LAST:event_dateDebutStateChanged
 
     private void prixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prixActionPerformed
-        location.getLocal().setPrixV(prix.getText()); 
     }//GEN-LAST:event_prixActionPerformed
 
     private void surfaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surfaceActionPerformed
-      
     }//GEN-LAST:event_surfaceActionPerformed
 
     private void annulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerActionPerformed
-      this.dispose();
+       this.dispose();
     }//GEN-LAST:event_annulerActionPerformed
+
+    private void locataireKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_locataireKeyReleased
+       location.getLocataire().setNomV(locataire.getText()); 
+    }//GEN-LAST:event_locataireKeyReleased
+
+    private void localKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_localKeyReleased
+    }//GEN-LAST:event_localKeyReleased
+
+    private void surfaceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_surfaceKeyReleased
+    }//GEN-LAST:event_surfaceKeyReleased
+
+    private void versementKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_versementKeyReleased
+      location.getLocal().setVersementV(versement.getText());
+    }//GEN-LAST:event_versementKeyReleased
+
+    private void prixKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_prixKeyReleased
+       location.getLocal().setPrixV(prix.getText());
+     }//GEN-LAST:event_prixKeyReleased
+
+    private void dureeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dureeKeyReleased
+       location.getLocal().setDureeV(duree.getText());
+    }//GEN-LAST:event_dureeKeyReleased
     
    
     java.util.GregorianCalendar calender=new java.util.GregorianCalendar();
-     private Object dateC=calender.getTime();
-    private Location location=new Location();
-    
-    
+    private Object dateC=calender.getTime();
+    private Location location=new Location();   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton annuler;
     private javax.swing.JSpinner dateDebut;
