@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  *Une méthode de suppression,
  *Et une méthode de recherche dans la BDD.
  **/
-public class Local {
+ public class Local {
    private int idLocal;
    private String etageNporteV="";
    private String surfaceV="";
