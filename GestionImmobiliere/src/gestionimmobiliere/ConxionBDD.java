@@ -14,15 +14,23 @@ import javax.swing.*;
 public class ConxionBDD {
 
 
-    public static Connection connection = null; // manages connection
-    public static Statement stmt = null; // query statement
-
+    public static Connection connection ; 
+    public static Statement stmt ; 
     
+    public ConxionBDD(){
+        connection = null;
+        stmt = null;
+    }
+
+    /**
+     * Cette méthode retourne l'objet statement 
+     * @return un objet de type statement qui permet l'execution des requettes sql
+     */
     public static Statement getStmt() {
         return stmt;
     }
     
-   
+  
 /**
  * Cette méthode permet d'établir la connexion entre le projet et la BDD.
  */
@@ -67,7 +75,8 @@ public static void connect() {
 
 
 /**
- * Cette méthode permet de fermer la BDD.
+ * Cette méthode permet de fermer la connexion avec la BDD.
+ *
  */
     public static void close() {
         try {

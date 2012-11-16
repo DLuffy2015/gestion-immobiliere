@@ -15,13 +15,14 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author souad
+ * @author souad   
  */
 /**
  *Cette classe permet de créer un objet LOCATION. Elle contient en plus des getters et des stters:
  *Deux constructeurs,
  *Une méthode d'initialisation,
  *Et une méthode de mise à jour dans la BDD.
+ * 
  **/
  public class Location {
     private Locataire locataire;
@@ -29,7 +30,8 @@ import java.util.logging.Logger;
    /**
     * 
     * Le constructeur de la classe qui permet de créer une instance de la classe en précisant tout ses paramètres.
-    * 
+    * @param locataire est le locataire conserné par la location
+    * @param local est le local conserné par la location
     */
 
      public Location(Locataire locataire,Local local){
@@ -46,6 +48,7 @@ import java.util.logging.Logger;
    /**
     * 
     * Cette méthode retourne le locataire correspondant à la location
+    * @return le locataire
     */
     public Locataire getLocataire() {
         return locataire;
@@ -53,6 +56,7 @@ import java.util.logging.Logger;
    /**
     * 
     * Cette méthode affecte le paramètre en entrée (locataire) au champs (locataire) de l'instance de la classe
+    * @param locataire 
     */
 
     public void setLocataire(Locataire locataire) {
@@ -61,6 +65,7 @@ import java.util.logging.Logger;
    /**
     * 
     * Cette méthode retourne le local correspondant à la location 
+    * @return local
     */
     public Local getLocal() {
         return local;
@@ -68,6 +73,7 @@ import java.util.logging.Logger;
    /**
     * 
     * Cette méthode affecte le paramètre en entrée (local) au champs (local) de l'instance de la classe
+    * @param local
     */
     public void setLocal(Local local) {
         this.local = local;
@@ -111,10 +117,13 @@ import java.util.logging.Logger;
                           Logger.getLogger(AjouterLocation.class.getName()).log(Level.SEVERE, null, ex);
                        }
     }
+    
+    
     /**
      * Cette méthode permet de convertir une chaine de caractères à un objet Date de java. 
+     * @param date de type string (chaine de caractère)
+     * @return date un objet de java
      */
-    
     public static java.util.Date convertirDate(String date) {
       java.util.Date dateC=null;
       SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
