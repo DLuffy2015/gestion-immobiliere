@@ -76,12 +76,22 @@ public class AjouterLocal extends javax.swing.JFrame {
                 adresseActionPerformed(evt);
             }
         });
+        adresse.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                adresseKeyReleased(evt);
+            }
+        });
 
         SurfaceLbl.setText("Surface");
 
         surface.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 surfaceActionPerformed(evt);
+            }
+        });
+        surface.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                surfaceKeyReleased(evt);
             }
         });
 
@@ -101,6 +111,11 @@ public class AjouterLocal extends javax.swing.JFrame {
         prix.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 prixActionPerformed(evt);
+            }
+        });
+        prix.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                prixKeyReleased(evt);
             }
         });
 
@@ -208,16 +223,12 @@ public class AjouterLocal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void surfaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surfaceActionPerformed
-        local.setSurfaceV(surface.getText());
     }//GEN-LAST:event_surfaceActionPerformed
 
     private void adresseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adresseActionPerformed
-        local.setEtageNporteV(adresse.getText());      
     }//GEN-LAST:event_adresseActionPerformed
 
     private void prixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prixActionPerformed
-        local.setPrixV(prix.getText());
-       
     }//GEN-LAST:event_prixActionPerformed
 
     private void FiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FiActionPerformed
@@ -247,6 +258,18 @@ public class AjouterLocal extends javax.swing.JFrame {
     private void AnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnulerActionPerformed
         this.dispose();
     }//GEN-LAST:event_AnnulerActionPerformed
+
+    private void adresseKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_adresseKeyReleased
+        local.setEtageNporteV(adresse.getText());      
+    }//GEN-LAST:event_adresseKeyReleased
+
+    private void surfaceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_surfaceKeyReleased
+        local.setSurfaceV(surface.getText());
+    }//GEN-LAST:event_surfaceKeyReleased
+
+    private void prixKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_prixKeyReleased
+        local.setPrixV(prix.getText());
+    }//GEN-LAST:event_prixKeyReleased
 
 
         

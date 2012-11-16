@@ -14,23 +14,17 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author user
+ * @author imane
  */
+/**
+ * Cette classe permet de faire les testes unitaires sur les methodes de la class conxionBDD du projet
+ */
+
 public class ConxionBDDTest {
     
     public ConxionBDDTest() {
     }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
   
-
     /**
      * Test of getStmt method, of class ConxionBDD.
      */
@@ -40,7 +34,6 @@ public class ConxionBDDTest {
         Statement expResult = null;
         Statement result = ConxionBDD.getStmt();
         assertTrue(expResult!=result);
-       
     }
 
    

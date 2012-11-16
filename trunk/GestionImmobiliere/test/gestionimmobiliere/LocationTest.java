@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package gestionimmobiliere;
 
 import org.junit.After;
@@ -13,38 +10,34 @@ import org.junit.Test;
 
 /**
  *
- * @author user
+ * @author souad
  */
+
+/**
+ * Cette classe permet de faire les testes unitaires sur les methodes de la class Location du projet
+ */
+
 public class LocationTest {
     Local localinst;
     Locataire locataireinst;
     Location instance;
-    //hna linstance location li ana rayhine
+   
     
     public LocationTest() {
-    localinst=new Local(4,"etage 5 Num 15","166m²",4,"22000","vaste appartement","2012-05-17","5mois","15000",1);
-    locataireinst= new Locataire("Sonia","soniaAlg@yahoo.fr","0556789123","cité militaire num15");
-    instance=new Location(locataireinst,localinst);
+      localinst=new Local(4,"etage 5 Num 15","166m²",4,"22000","vaste appartement","2012-05-17","5mois","15000",1);
+      locataireinst= new Locataire("Sonia","soniaAlg@yahoo.fr","0556789123","cité militaire num15");
+      instance=new Location(locataireinst,localinst);
     }
     
     @BeforeClass
     public static void setUpClass() {
-    ConxionBDD.connect();
+      ConxionBDD.connect();
     }
     
     @AfterClass
     public static void tearDownClass() {
-        ConxionBDD.close();
+      ConxionBDD.close();
     }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-    
     
    
     /**
@@ -55,10 +48,8 @@ public class LocationTest {
    
     public void testInitialiserLocation(){
         System.out.println("InitialiserLocation");
-        Location expResult1 = new Location();
         instance.getLocal().setIdLocal(3);
         instance.initialiserLocation();
-        
         assertEquals("nouar meriem", instance.getLocataire().getNomV());
         assertEquals("1er etage N°2", instance.getLocal().getEtageNporteV());
     }
@@ -76,7 +67,7 @@ public class LocationTest {
         Local local=new Local(4,"","",0,"25milles dinars","appartement non meubler","2012-11-11","1mois","23milles dinars",2);
         instance.setLocal(local);          
         instance.miseAJourLocal();
-        instance.initialiserLocation();//on doit avoir une ligne 2 dans local qui contien qlq info cm tu veux puis on modifier aussi une clé etrangere vars client n import tani w ykon un client d id 2 déja enreg
+        instance.initialiserLocation();
         assertEquals("23milles dinars", instance.getLocal().getVersementV());
         assertEquals(2, instance.getLocal().getLocataireV());
     
@@ -84,7 +75,7 @@ public class LocationTest {
 
     /**
      * Test of convertirDate method, of class Location.
-     * dans la creation de l objet date on a utiliser le constructeur :
+     * dans la creation de l'objet date on a utiliser le constructeur :
      * public Date(int year,int month, int date) 
      * Avec les parameters:     - the year minus 1900 month. 
      *                          - the month between 0-11 date. 
@@ -109,8 +100,7 @@ public class LocationTest {
         Locataire expResult = locataireinst;
         Locataire result = instance.getLocataire();
         assertEquals(expResult, result);
-        
-    }
+   }
 
     /**
      * Test of setLocataire method, of class Location.
@@ -133,7 +123,6 @@ public class LocationTest {
         Local expResult = localinst;
         Local result = instance.getLocal();
         assertEquals(expResult, result);
-        
     }
 
     /**

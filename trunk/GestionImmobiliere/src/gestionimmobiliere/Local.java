@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author user
+ * @author souad
  */
 /**
  *Cette classe permet de créer un objet LOCAL. Elle contient en plus des getters et des stters:
@@ -206,8 +206,7 @@ public class Local {
                 {
                Logger.getLogger(AjouterLocal.class.getName()).log(Level.SEVERE, null, ex);
                 }
-   
-    }
+   }
    
    /**
  * Cette méthode recherche un local par son étage et le numéro de porte, le prix, la surface, le nombre de pièces et la description du local
@@ -225,7 +224,9 @@ public class Local {
           while(rs.next()) i=rs.getInt(1);
 
         }catch ( SQLException sqlException )
-                {sqlException.printStackTrace();}
+                {
+                    sqlException.printStackTrace();
+                }
      return i;
 }
 
@@ -237,6 +238,9 @@ public class Local {
            String query = "DELETE FROM locaux WHERE id = "+idLocal;
            ConxionBDD.stmt.executeUpdate(query);
          } catch (SQLException sqlException )
-                 {sqlException.printStackTrace(); }
+                 {
+                     sqlException.printStackTrace();
+                 }
    }
 }
+
