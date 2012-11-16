@@ -271,9 +271,7 @@ public class AjouterLocal extends javax.swing.JFrame {
         local.setPrixV(prix.getText());
     }//GEN-LAST:event_prixKeyReleased
 
-
-        
-        
+    
    private Local local= new Local();           
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AdresseLbl;

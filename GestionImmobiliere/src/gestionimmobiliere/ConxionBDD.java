@@ -22,11 +22,7 @@ public class ConxionBDD {
         return stmt;
     }
     
-      //private static ResultSetMetaData metaData=null;
-
-
-  //*********************************************************************//
-
+   
 /**
  * Cette méthode permet d'établir la connexion entre le projet et la BDD.
  */
@@ -69,10 +65,7 @@ public static void connect() {
         }
     }
 
-//***********************************************************************//
-//------------------------------------------------------------------------------
-//                       FONCTION DE DECONNECTION A LA BDD
-//------------------------------------------------------------------------------
+
 /**
  * Cette méthode permet de fermer la BDD.
  */
