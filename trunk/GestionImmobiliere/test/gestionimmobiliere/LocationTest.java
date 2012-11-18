@@ -48,7 +48,7 @@ public class LocationTest {
    
     public void testInitialiserLocation(){
         System.out.println("InitialiserLocation");
-        instance.getLocal().setIdLocal(3);
+        instance.getLocal().setIdLocal(15);//a modif
         instance.initialiserLocation();
         assertEquals("nouar meriem", instance.getLocataire().getNomV());
         assertEquals("1er etage N°2", instance.getLocal().getEtageNporteV());

@@ -52,7 +52,6 @@ public class Principal extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         AjouLocal = new javax.swing.JButton();
         AjouLocataire = new javax.swing.JButton();
-        Apropo = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -116,13 +115,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        Apropo.setText("A propos");
-        Apropo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ApropoActionPerformed(evt);
-            }
-        });
-
         jLabel3.setText("jLabel3");
 
         jLabel4.setText("75M² -3pieces-1er etage");
@@ -152,9 +144,6 @@ public class Principal extends javax.swing.JFrame {
                                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addComponent(Apropo, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -177,9 +166,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addComponent(Apropo)
-                .addGap(46, 46, 46))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
 
         jTable1.setModel(model);
@@ -382,10 +369,6 @@ public class Principal extends javax.swing.JFrame {
        AjouterLocal local=new AjouterLocal();
        local.setVisible(true);
     }//GEN-LAST:event_AjouLocalActionPerformed
-
-    private void ApropoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApropoActionPerformed
-     
-    }//GEN-LAST:event_ApropoActionPerformed
 
     private void AjouLocataireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AjouLocataireActionPerformed
         AjouterLocataire locataire=new AjouterLocataire();
@@ -680,7 +663,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton AjouLocal;
     private javax.swing.JButton AjouLocataire;
     private javax.swing.JMenuItem AjoutLocation;
-    private javax.swing.JButton Apropo;
     private javax.swing.JMenuItem SuppLocataire;
     private javax.swing.JMenuItem SuppLocation;
     private javax.swing.JComboBox critereRechercher;

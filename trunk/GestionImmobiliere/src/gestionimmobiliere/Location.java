@@ -109,7 +109,7 @@ import java.util.logging.Logger;
      * Cette méthode permet de mettre à jour le local 
      */
     public void miseAJourLocal(){
-       String query = "UPDATE locaux SET locataire = "+local.getLocataireV()+" , versement = '"+local.getVersementV()+"' , dateDebut = "+local.getDateDebutV()+" , prix='"+local.getPrixV()+"', duree = '"+local.getDureeV()+"', description ='"+local.getDescriptionV()+"' WHERE id = "+local.getIdLocal() ;
+       String query = "UPDATE locaux SET locataire = "+local.getLocataireV()+" , versement = '"+local.getVersementV()+"' , dateDebut = '"+local.getDateDebutV()+"' , prix= '"+local.getPrixV()+"', duree = '"+local.getDureeV()+"', description = '"+local.getDescriptionV()+"' WHERE id = "+local.getIdLocal() ;
             try {
                 ConxionBDD.stmt.executeUpdate(query);
                 } catch (SQLException ex)

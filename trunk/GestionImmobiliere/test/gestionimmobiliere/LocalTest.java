@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 public class LocalTest {
     Local instance;
     public LocalTest() {
-    instance =new Local(3,"2emme etage N°3","120M²",5,"45milles dinars","prix négociable","2012/11/10","5 mois ","1000dinars",4);
+    instance =new Local(3,"2emme etage N°3","120M²",5,"45milles dinars","prix négociable","2012-11-10","5 mois","1000dinars",4);
    
     }
     
@@ -249,7 +249,7 @@ public class LocalTest {
     public void testRechercherLocal() {
         System.out.println("rechercherLocal");
         Local instancet = new Local(3,"6emme Etage N°12","100 M²",5,"33milles dinars","Une belle appartement meublé","2012-11-10","5 mois ","1000dinars",4);
-        int expResult = 1;
+        int expResult = 17;//a modif
         int result = instancet.rechercherLocal();
         assertEquals(expResult, result);
           }
@@ -271,9 +271,9 @@ public class LocalTest {
      * Test of supprimerLocal method, of class Local.
      */
     @Test
-    public void supprimerLocal() {
-        System.out.println("supprimerLocal");
-        Local instancet = new Local(5,"2emme Etage N°5","80 M²",4,"25milles dinars","Une belle appartement meublé","","","",2);
+    public void testSupprimerLocal() {
+        System.out.println("supprimerLocal");// id a modif
+        Local instancet = new Local(18,"3emme Etage N°6","80 M²",4,"25milles dinars","Une belle appartement meublé","","","",2);
         int expResult = -1;
         instance.supprimerLocal();
         int result = instancet.rechercherLocal();

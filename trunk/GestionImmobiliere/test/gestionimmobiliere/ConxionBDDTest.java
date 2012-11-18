@@ -31,9 +31,8 @@ public class ConxionBDDTest {
     @Test
     public void testGetStmt() {
         System.out.println("getStmt");
-        Statement expResult = null;
         Statement result = ConxionBDD.getStmt();
-        assertTrue(expResult!=result);
+        assertNotNull(result);
     }
 
    
