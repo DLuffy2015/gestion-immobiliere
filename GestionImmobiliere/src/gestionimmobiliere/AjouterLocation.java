@@ -143,6 +143,9 @@ public class AjouterLocation extends javax.swing.JFrame {
 
         dateDebut.setEditor(new javax.swing.JSpinner.DateEditor(dateDebut, "yyyy-MM-dd"));
         dateDebut.setValue(dateC);
+        dateDebut.setValue(dateC);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        location.getLocal().setDateDebutV(simpleDateFormat.format(dateC));
         dateDebut.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 dateDebutStateChanged(evt);

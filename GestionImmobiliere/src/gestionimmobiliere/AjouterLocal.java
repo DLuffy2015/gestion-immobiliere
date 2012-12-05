@@ -232,7 +232,7 @@ public class AjouterLocal extends javax.swing.JFrame {
     }//GEN-LAST:event_prixActionPerformed
 
     private void FiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FiActionPerformed
-        local.setFiV(Fi.getSelectedIndex()+3);
+        local.setFiV(Fi.getSelectedIndex());
     }//GEN-LAST:event_FiActionPerformed
 
     private void ValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValiderActionPerformed

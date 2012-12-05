@@ -22,7 +22,7 @@ import java.util.logging.Logger;
    private int idLocal;
    private String etageNporteV="";
    private String surfaceV="";
-   private int FiV;
+   private int FiV=3;
    private String prixV="";
    private String descriptionV="";  
    private String dateDebutV="";
@@ -248,8 +248,9 @@ import java.util.logging.Logger;
    public int rechercherLocal(){
      int i=-1;
      try{
+       
           String query;
-          query= " SELECT id FROM locaux  WHERE etageNumPorte = '"+this.etageNporteV+"' AND prix = '"+this.prixV+"' AND surface = '"+this.surfaceV+"' AND  nombrePieces = "+this.FiV+" AND description = '"+this.descriptionV+"'";
+          query= " SELECT id FROM locaux WHERE etageNumPorte = '"+this.etageNporteV+"' AND prix = '"+this.prixV+"' AND surface = '"+this.surfaceV+"' AND  nombrePieces = "+this.FiV+" AND description = '"+this.descriptionV+"'";
           ConxionBDD.stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);
           ResultSet rs= ConxionBDD.stmt.executeQuery(query);
           while(rs.next()) i=rs.getInt(1);
