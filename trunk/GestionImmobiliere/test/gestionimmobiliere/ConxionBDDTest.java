@@ -32,7 +32,7 @@ public class ConxionBDDTest {
     public void testGetStmt() {
         System.out.println("getStmt");
         Statement result = ConxionBDD.getStmt();
-        assertNotNull(result);
+        assertNull(result);
     }
 
    

@@ -1,4 +1,3 @@
-
 package gestionimmobiliere;
 
 import org.junit.After;
@@ -48,7 +47,7 @@ public class LocationTest {
    
     public void testInitialiserLocation(){
         System.out.println("InitialiserLocation");
-        instance.getLocal().setIdLocal(15);//a modif
+        instance.getLocal().setIdLocal(15);
         instance.initialiserLocation();
         assertEquals("nouar meriem", instance.getLocataire().getNomV());
         assertEquals("1er etage N°2", instance.getLocal().getEtageNporteV());
@@ -64,13 +63,14 @@ public class LocationTest {
     @Test
     public void testMiseAJourLocal() {
         System.out.println("miseAJourLocal");
-        Local local=new Local(4,"","",0,"25milles dinars","appartement non meubler","2012-11-11","1mois","23milles dinars",2);
+        Local local=new Local(35,"5emme etage N°10","90M²",3,"25milles dinars","appartement non meubler","2012-11-11","1mois","20milles dinars",25);
         instance.setLocal(local);          
         instance.miseAJourLocal();
         instance.initialiserLocation();
-        assertEquals("23milles dinars", instance.getLocal().getVersementV());
-        assertEquals(2, instance.getLocal().getLocataireV());
-    
+        assertEquals("20milles dinars", instance.getLocal().getVersementV());
+        assertEquals(25, instance.getLocal().getLocataireV());
+        assertEquals("2012-11-11", instance.getLocal().getDateDebutV());
+        assertEquals("appartement non meubler", instance.getLocal().getDescriptionV());
     }
 
     /**
@@ -114,6 +114,11 @@ public class LocationTest {
         assertEquals(locataire, result);
     }
 
+    
+    
+    
+    
+    
     /**
      * Test of getLocal method, of class Location.
      */
