@@ -115,6 +115,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setIcon(new javax.swing.ImageIcon("G:\\GestionImmobiliere\\images\\f_446961181-1422871112.jpg")); // NOI18N
         jLabel3.setText("jLabel3");
 
         jLabel4.setText("75M² -3pieces-1er etage");
@@ -123,29 +124,25 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel6.setText("prix 22milles dinars(Négociable)");
 
+        jLabel7.setIcon(new javax.swing.ImageIcon("G:\\GestionImmobiliere\\images\\prospection-villa-alger-14187_1_640.jpg")); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(AjouLocal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(AjouLocataire, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(AjouLocal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(AjouLocataire, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -391,10 +388,14 @@ public class Principal extends javax.swing.JFrame {
     private void lancerRechercheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lancerRechercheActionPerformed
       int indice=0;
       int nbPiece=0;
-      if(critereRech!=0)
-      {
+      
         switch (critereRech)
         {
+            case 0: 
+           {
+               initTabLocaux( "SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,agence_immobiliere.locataire.nom FROM locaux LEFT JOIN locataire on agence_immobiliere.locaux.locataire=agence_immobiliere.locataire.id WHERE 1");
+         }
+           break;
            case 1: 
            {
                initTabLocaux( "SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,agence_immobiliere.locataire.nom FROM locaux LEFT JOIN locataire ON agence_immobiliere.locaux.locataire=agence_immobiliere.locataire.id WHERE locaux.prix = '"+detailRech+"'");
@@ -415,17 +416,17 @@ public class Principal extends javax.swing.JFrame {
            break;
            case 3:
            {
-               initTabLocaux( "SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,agence_immobiliere.locataire.nom FROM locaux LEFT JOIN locataire ON agence_immobiliere.locaux.locataire=agence_immobiliere.locataire.id WHERE locaux.locataire = NULL");
+               initTabLocaux( "SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,agence_immobiliere.locataire.nom FROM locaux LEFT JOIN locataire ON agence_immobiliere.locaux.locataire=agence_immobiliere.locataire.id WHERE locaux.locataire IS NULL");
                 
            }
            break;
            case 4:
            {
-               initTabLocaux( "SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,agence_immobiliere.locataire.nom FROM locaux LEFT JOIN locataire ON agence_immobiliere.locaux.locataire=agence_immobiliere.locataire.id WHERE locaux.locataire <> NULL");
+               initTabLocaux( "SELECT locaux.id,locaux.etageNumPorte, locaux.nombrePieces,locaux.prix,agence_immobiliere.locataire.nom FROM locaux LEFT JOIN locataire ON agence_immobiliere.locaux.locataire=agence_immobiliere.locataire.id WHERE locaux.locataire IS NOT NULL");
            }
            break;
         }    
-      }
+      
             
     }//GEN-LAST:event_lancerRechercheActionPerformed
 

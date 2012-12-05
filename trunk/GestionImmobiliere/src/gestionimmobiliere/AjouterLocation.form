@@ -255,7 +255,7 @@
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JSpinner(new javax.swing.SpinnerDateModel(new java.util.Date(), null, null, java.util.Calendar.DAY_OF_MONTH))"/>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="dateDebut.setEditor(new javax.swing.JSpinner.DateEditor(dateDebut, &quot;yyyy-MM-dd&quot;));&#xa;dateDebut.setValue(dateC);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="dateDebut.setEditor(new javax.swing.JSpinner.DateEditor(dateDebut, &quot;yyyy-MM-dd&quot;));&#xa;dateDebut.setValue(dateC);&#xa;dateDebut.setValue(dateC);&#xa;SimpleDateFormat simpleDateFormat = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);&#xa;location.getLocal().setDateDebutV(simpleDateFormat.format(dateC));"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
