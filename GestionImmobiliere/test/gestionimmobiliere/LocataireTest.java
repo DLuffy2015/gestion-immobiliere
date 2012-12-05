@@ -139,11 +139,12 @@ public class LocataireTest {
         assertEquals(expResult, result);
        
         System.out.println("rechercherLocataire (existe)");
-        instancet.setNomV("Tebbi souad");
+        instancet.setNomV("Tebbi Souad");
         expResult = 13;
         result = instancet.rechercherLocataire();
         assertEquals(expResult, result);
      }
+       
     
     /**
      * Test of insererLocataire method, of class Locataire.
@@ -165,7 +166,7 @@ public class LocataireTest {
     public void supprimerLocataire() {
         System.out.println("supprimerLocataire");
         Locataire instancet = new Locataire();
-        instancet.supprimerLocataire(14);//a modifier chaque foix
+        instancet.supprimerLocataire(24);
         int expResult = -1;
         int result = instance.rechercherLocataire();
         assertEquals(expResult, result);
